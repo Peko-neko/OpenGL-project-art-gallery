@@ -1375,5 +1375,29 @@
     <Image Include="pictures\venus.jpg">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="adam.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="girlwithpearl.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="La Grande Jatte.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="lastsupper.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="mona.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="nightwatch.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="starry.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="venus.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

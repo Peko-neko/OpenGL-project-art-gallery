@@ -41,50 +41,238 @@ void main() {
 
 // Vertices with texture coordinates
 float vertices[] = {
-    // Floor
-    -1.25f,  0.0f, -1.25f,  0.0f, 0.0f,
-     1.25f,  0.0f, -1.25f,  1.0f, 0.0f,
-     1.25f,  0.0f,  1.25f,  1.0f, 1.0f,
-    -1.25f,  0.0f, -1.25f,  0.0f, 0.0f,
-     1.25f,  0.0f,  1.25f,  1.0f, 1.0f,
-    -1.25f,  0.0f,  1.25f,  0.0f, 1.0f,
+    // Floor (5x larger)
+    -6.25f,  0.0f, -6.25f,  0.0f, 0.0f,
+     6.25f,  0.0f, -6.25f,  5.0f, 0.0f,
+     6.25f,  0.0f,  6.25f,  5.0f, 5.0f,
+    -6.25f,  0.0f, -6.25f,  0.0f, 0.0f,
+     6.25f,  0.0f,  6.25f,  5.0f, 5.0f,
+    -6.25f,  0.0f,  6.25f,  0.0f, 5.0f,
 
-    // Ceiling
-    -1.25f,  1.0f, -1.25f,  0.0f, 0.0f,
-     1.25f,  1.0f, -1.25f,  1.0f, 0.0f,
-     1.25f,  1.0f,  1.25f,  1.0f, 1.0f,
-    -1.25f,  1.0f, -1.25f,  0.0f, 0.0f,
-     1.25f,  1.0f,  1.25f,  1.0f, 1.0f,
-    -1.25f,  1.0f,  1.25f,  0.0f, 1.0f,
+    // ceiling (5x larger)
+    -6.25f,  1.0f, -6.25f,  0.0f, 0.0f,
+     6.25f,  1.0f, -6.25f,  5.0f, 0.0f,
+     6.25f,  1.0f,  6.25f,  5.0f, 5.0f,
+    -6.25f,  1.0f, -6.25f,  0.0f, 0.0f,
+     6.25f,  1.0f,  6.25f,  5.0f, 5.0f,
+    -6.25f,  1.0f,  6.25f,  0.0f, 5.0f,
 
-    // Walls
-    -1.25f,  0.0f, -1.25f,  0.0f, 0.0f,
-    -1.25f,  1.0f, -1.25f,  0.0f, 1.0f,
-     1.25f,  1.0f, -1.25f,  1.0f, 1.0f,
-    -1.25f,  0.0f, -1.25f,  0.0f, 0.0f,
-     1.25f,  1.0f, -1.25f,  1.0f, 1.0f,
-     1.25f,  0.0f, -1.25f,  1.0f, 0.0f,
 
-     1.25f,  0.0f, -1.25f,  0.0f, 0.0f,
-     1.25f,  1.0f, -1.25f,  0.0f, 1.0f,
-     1.25f,  1.0f,  1.25f,  1.0f, 1.0f,
-     1.25f,  0.0f, -1.25f,  0.0f, 0.0f,
-     1.25f,  1.0f,  1.25f,  1.0f, 1.0f,
-     1.25f,  0.0f,  1.25f,  1.0f, 0.0f,
+    // Walls (5 segments per side)
+    // Back wall (-Z direction)
+    -6.25f, 0.0f, -6.25f,  0.0f, 0.0f,
+    -6.25f, 1.0f, -6.25f,  0.0f, 1.0f,
+    -3.75f, 1.0f, -6.25f,  1.0f, 1.0f,
+    -6.25f, 0.0f, -6.25f,  0.0f, 0.0f,
+    -3.75f, 1.0f, -6.25f,  1.0f, 1.0f,
+    -3.75f, 0.0f, -6.25f,  1.0f, 0.0f,
 
-     1.25f,  0.0f,  1.25f,  0.0f, 0.0f,
-     1.25f,  1.0f,  1.25f,  0.0f, 1.0f,
-    -1.25f,  1.0f,  1.25f,  1.0f, 1.0f,
-     1.25f,  0.0f,  1.25f,  0.0f, 0.0f,
-    -1.25f,  1.0f,  1.25f,  1.0f, 1.0f,
-    -1.25f,  0.0f,  1.25f,  1.0f, 0.0f,
+    -3.75f, 0.0f, -6.25f,  0.0f, 0.0f,
+    -3.75f, 1.0f, -6.25f,  0.0f, 1.0f,
+    -1.25f, 1.0f, -6.25f,  1.0f, 1.0f,
+    -3.75f, 0.0f, -6.25f,  0.0f, 0.0f,
+    -1.25f, 1.0f, -6.25f,  1.0f, 1.0f,
+    -1.25f, 0.0f, -6.25f,  1.0f, 0.0f,
 
-    -1.25f,  0.0f,  1.25f,  0.0f, 0.0f,
-    -1.25f,  1.0f,  1.25f,  0.0f, 1.0f,
-    -1.25f,  1.0f, -1.25f,  1.0f, 1.0f,
-    -1.25f,  0.0f,  1.25f,  0.0f, 0.0f,
-    -1.25f,  1.0f, -1.25f,  1.0f, 1.0f,
-    -1.25f,  0.0f, -1.25f,  1.0f, 0.0f
+    -1.25f, 0.0f, -6.25f,  0.0f, 0.0f,
+    -1.25f, 1.0f, -6.25f,  0.0f, 1.0f,
+     1.25f, 1.0f, -6.25f,  1.0f, 1.0f,
+    -1.25f, 0.0f, -6.25f,  0.0f, 0.0f,
+     1.25f, 1.0f, -6.25f,  1.0f, 1.0f,
+     1.25f, 0.0f, -6.25f,  1.0f, 0.0f,
+
+     1.25f, 0.0f, -6.25f,  0.0f, 0.0f,
+     1.25f, 1.0f, -6.25f,  0.0f, 1.0f,
+     3.75f, 1.0f, -6.25f,  1.0f, 1.0f,
+     1.25f, 0.0f, -6.25f,  0.0f, 0.0f,
+     3.75f, 1.0f, -6.25f,  1.0f, 1.0f,
+     3.75f, 0.0f, -6.25f,  1.0f, 0.0f,
+
+     3.75f, 0.0f, -6.25f,  0.0f, 0.0f,
+     3.75f, 1.0f, -6.25f,  0.0f, 1.0f,
+     6.25f, 1.0f, -6.25f,  1.0f, 1.0f,
+     3.75f, 0.0f, -6.25f,  0.0f, 0.0f,
+     6.25f, 1.0f, -6.25f,  1.0f, 1.0f,
+     6.25f, 0.0f, -6.25f,  1.0f, 0.0f,
+
+         // Front wall (+Z direction)
+    -6.25f, 0.0f,  6.25f,  0.0f, 0.0f,
+    -6.25f, 1.0f,  6.25f,  0.0f, 1.0f,
+    -3.75f, 1.0f,  6.25f,  1.0f, 1.0f,
+    -6.25f, 0.0f,  6.25f,  0.0f, 0.0f,
+    -3.75f, 1.0f,  6.25f,  1.0f, 1.0f,
+    -3.75f, 0.0f,  6.25f,  1.0f, 0.0f,
+
+    -3.75f, 0.0f,  6.25f,  0.0f, 0.0f,
+    -3.75f, 1.0f,  6.25f,  0.0f, 1.0f,
+    -1.25f, 1.0f,  6.25f,  1.0f, 1.0f,
+    -3.75f, 0.0f,  6.25f,  0.0f, 0.0f,
+    -1.25f, 1.0f,  6.25f,  1.0f, 1.0f,
+    -1.25f, 0.0f,  6.25f,  1.0f, 0.0f,
+
+    -1.25f, 0.0f,  6.25f,  0.0f, 0.0f,
+    -1.25f, 1.0f,  6.25f,  0.0f, 1.0f,
+     1.25f, 1.0f,  6.25f,  1.0f, 1.0f,
+    -1.25f, 0.0f,  6.25f,  0.0f, 0.0f,
+     1.25f, 1.0f,  6.25f,  1.0f, 1.0f,
+     1.25f, 0.0f,  6.25f,  1.0f, 0.0f,
+
+     1.25f, 0.0f,  6.25f,  0.0f, 0.0f,
+     1.25f, 1.0f,  6.25f,  0.0f, 1.0f,
+     3.75f, 1.0f,  6.25f,  1.0f, 1.0f,
+     1.25f, 0.0f,  6.25f,  0.0f, 0.0f,
+     3.75f, 1.0f,  6.25f,  1.0f, 1.0f,
+     3.75f, 0.0f,  6.25f,  1.0f, 0.0f,
+
+     3.75f, 0.0f,  6.25f,  0.0f, 0.0f,
+     3.75f, 1.0f,  6.25f,  0.0f, 1.0f,
+     6.25f, 1.0f,  6.25f,  1.0f, 1.0f,
+     3.75f, 0.0f,  6.25f,  0.0f, 0.0f,
+     6.25f, 1.0f,  6.25f,  1.0f, 1.0f,
+     6.25f, 0.0f,  6.25f,  1.0f, 0.0f,
+     // Front wall (+Z direction)
+    -6.25f, 0.0f,  6.25f,  0.0f, 0.0f,
+    -6.25f, 1.0f,  6.25f,  0.0f, 1.0f,
+    -3.75f, 1.0f,  6.25f,  1.0f, 1.0f,
+    -6.25f, 0.0f,  6.25f,  0.0f, 0.0f,
+    -3.75f, 1.0f,  6.25f,  1.0f, 1.0f,
+    -3.75f, 0.0f,  6.25f,  1.0f, 0.0f,
+
+    -3.75f, 0.0f,  6.25f,  0.0f, 0.0f,
+    -3.75f, 1.0f,  6.25f,  0.0f, 1.0f,
+    -1.25f, 1.0f,  6.25f,  1.0f, 1.0f,
+    -3.75f, 0.0f,  6.25f,  0.0f, 0.0f,
+    -1.25f, 1.0f,  6.25f,  1.0f, 1.0f,
+    -1.25f, 0.0f,  6.25f,  1.0f, 0.0f,
+
+    -1.25f, 0.0f,  6.25f,  0.0f, 0.0f,
+    -1.25f, 1.0f,  6.25f,  0.0f, 1.0f,
+    1.25f, 1.0f,  6.25f,  1.0f, 1.0f,
+    -1.25f, 0.0f,  6.25f,  0.0f, 0.0f,
+    1.25f, 1.0f,  6.25f,  1.0f, 1.0f,
+    1.25f, 0.0f,  6.25f,  1.0f, 0.0f,
+
+    1.25f, 0.0f,  6.25f,  0.0f, 0.0f,
+    1.25f, 1.0f,  6.25f,  0.0f, 1.0f,
+    3.75f, 1.0f,  6.25f,  1.0f, 1.0f,
+    1.25f, 0.0f,  6.25f,  0.0f, 0.0f,
+    3.75f, 1.0f,  6.25f,  1.0f, 1.0f,
+    3.75f, 0.0f,  6.25f,  1.0f, 0.0f,
+
+    3.75f, 0.0f,  6.25f,  0.0f, 0.0f,
+    3.75f, 1.0f,  6.25f,  0.0f, 1.0f,
+    6.25f, 1.0f,  6.25f,  1.0f, 1.0f,
+    3.75f, 0.0f,  6.25f,  0.0f, 0.0f,
+    6.25f, 1.0f,  6.25f,  1.0f, 1.0f,
+    6.25f, 0.0f,  6.25f,  1.0f, 0.0f,
+
+            // Left wall (-X direction)
+    -6.25f, 0.0f, -6.25f,  0.0f, 0.0f,
+    -6.25f, 1.0f, -6.25f,  0.0f, 1.0f,
+    -6.25f, 1.0f, -3.75f,  1.0f, 1.0f,
+    -6.25f, 0.0f, -6.25f,  0.0f, 0.0f,
+    -6.25f, 1.0f, -3.75f,  1.0f, 1.0f,
+    -6.25f, 0.0f, -3.75f,  1.0f, 0.0f,
+
+    -6.25f, 0.0f, -3.75f,  0.0f, 0.0f,
+    -6.25f, 1.0f, -3.75f,  0.0f, 1.0f,
+    -6.25f, 1.0f, -1.25f,  1.0f, 1.0f,
+    -6.25f, 0.0f, -3.75f,  0.0f, 0.0f,
+    -6.25f, 1.0f, -1.25f,  1.0f, 1.0f,
+    -6.25f, 0.0f, -1.25f,  1.0f, 0.0f,
+
+    -6.25f, 0.0f, -1.25f,  0.0f, 0.0f,
+    -6.25f, 1.0f, -1.25f,  0.0f, 1.0f,
+    -6.25f, 1.0f,  1.25f,  1.0f, 1.0f,
+    -6.25f, 0.0f, -1.25f,  0.0f, 0.0f,
+    -6.25f, 1.0f,  1.25f,  1.0f, 1.0f,
+    -6.25f, 0.0f,  1.25f,  1.0f, 0.0f,
+
+    -6.25f, 0.0f,  1.25f,  0.0f, 0.0f,
+    -6.25f, 1.0f,  1.25f,  0.0f, 1.0f,
+    -6.25f, 1.0f,  3.75f,  1.0f, 1.0f,
+    -6.25f, 0.0f,  1.25f,  0.0f, 0.0f,
+    -6.25f, 1.0f,  3.75f,  1.0f, 1.0f,
+    -6.25f, 0.0f,  3.75f,  1.0f, 0.0f,
+
+    -6.25f, 0.0f,  3.75f,  0.0f, 0.0f,
+    -6.25f, 1.0f,  3.75f,  0.0f, 1.0f,
+    -6.25f, 1.0f,  6.25f,  1.0f, 1.0f,
+    -6.25f, 0.0f,  3.75f,  0.0f, 0.0f,
+    -6.25f, 1.0f,  6.25f,  1.0f, 1.0f,
+    -6.25f, 0.0f,  6.25f,  1.0f, 0.0f,
+    // Left wall (-X direction)
+     -6.25f, 0.0f, -6.25f, 0.0f, 0.0f,
+     -6.25f, 1.0f, -6.25f, 0.0f, 1.0f,
+     -6.25f, 1.0f, -3.75f, 1.0f, 1.0f,
+     -6.25f, 0.0f, -6.25f, 0.0f, 0.0f,
+     -6.25f, 1.0f, -3.75f, 1.0f, 1.0f,
+     -6.25f, 0.0f, -3.75f, 1.0f, 0.0f,
+
+     -6.25f, 0.0f, -3.75f, 0.0f, 0.0f,
+     -6.25f, 1.0f, -3.75f, 0.0f, 1.0f,
+     -6.25f, 1.0f, -1.25f, 1.0f, 1.0f,
+     -6.25f, 0.0f, -3.75f, 0.0f, 0.0f,
+     -6.25f, 1.0f, -1.25f, 1.0f, 1.0f,
+     -6.25f, 0.0f, -1.25f, 1.0f, 0.0f,
+
+     -6.25f, 0.0f, -1.25f, 0.0f, 0.0f,
+     -6.25f, 1.0f, -1.25f, 0.0f, 1.0f,
+     -6.25f, 1.0f, 1.25f, 1.0f, 1.0f,
+     -6.25f, 0.0f, -1.25f, 0.0f, 0.0f,
+     -6.25f, 1.0f, 1.25f, 1.0f, 1.0f,
+     -6.25f, 0.0f, 1.25f, 1.0f, 0.0f,
+
+     -6.25f, 0.0f, 1.25f, 0.0f, 0.0f,
+     -6.25f, 1.0f, 1.25f, 0.0f, 1.0f,
+     -6.25f, 1.0f, 3.75f, 1.0f, 1.0f,
+     -6.25f, 0.0f, 1.25f, 0.0f, 0.0f,
+     -6.25f, 1.0f, 3.75f, 1.0f, 1.0f,
+     -6.25f, 0.0f, 3.75f, 1.0f, 0.0f,
+
+     -6.25f, 0.0f, 3.75f, 0.0f, 0.0f,
+     -6.25f, 1.0f, 3.75f, 0.0f, 1.0f,
+     -6.25f, 1.0f, 6.25f, 1.0f, 1.0f,
+     -6.25f, 0.0f, 3.75f, 0.0f, 0.0f,
+     -6.25f, 1.0f, 6.25f, 1.0f, 1.0f,
+     -6.25f, 0.0f, 6.25f, 1.0f, 0.0f,
+
+        // Right wall (+X direction)
+     6.25f, 0.0f, -6.25f,  0.0f, 0.0f,
+     6.25f, 1.0f, -6.25f,  0.0f, 1.0f,
+     6.25f, 1.0f, -3.75f,  1.0f, 1.0f,
+     6.25f, 0.0f, -6.25f,  0.0f, 0.0f,
+     6.25f, 1.0f, -3.75f,  1.0f, 1.0f,
+     6.25f, 0.0f, -3.75f,  1.0f, 0.0f,
+
+     6.25f, 0.0f, -3.75f,  0.0f, 0.0f,
+     6.25f, 1.0f, -3.75f,  0.0f, 1.0f,
+     6.25f, 1.0f, -1.25f,  1.0f, 1.0f,
+     6.25f, 0.0f, -3.75f,  0.0f, 0.0f,
+     6.25f, 1.0f, -1.25f,  1.0f, 1.0f,
+     6.25f, 0.0f, -1.25f,  1.0f, 0.0f,
+
+     6.25f, 0.0f, -1.25f,  0.0f, 0.0f,
+     6.25f, 1.0f, -1.25f,  0.0f, 1.0f,
+     6.25f, 1.0f,  1.25f,  1.0f, 1.0f,
+     6.25f, 0.0f, -1.25f,  0.0f, 0.0f,
+     6.25f, 1.0f,  1.25f,  1.0f, 1.0f,
+     6.25f, 0.0f,  1.25f,  1.0f, 0.0f,
+
+     6.25f, 0.0f,  1.25f,  0.0f, 0.0f,
+     6.25f, 1.0f,  1.25f,  0.0f, 1.0f,
+     6.25f, 1.0f,  3.75f,  1.0f, 1.0f,
+     6.25f, 0.0f,  1.25f,  0.0f, 0.0f,
+     6.25f, 1.0f,  3.75f,  1.0f, 1.0f,
+     6.25f, 0.0f,  3.75f,  1.0f, 0.0f,
+
+     6.25f, 0.0f,  3.75f,  0.0f, 0.0f,
+     6.25f, 1.0f,  3.75f,  0.0f, 1.0f,
+     6.25f, 1.0f,  6.25f,  1.0f, 1.0f,
+     6.25f, 0.0f,  3.75f,  0.0f, 0.0f,
+     6.25f, 1.0f,  6.25f,  1.0f, 1.0f,
+     6.25f, 0.0f,  6.25f,  1.0f, 0.0f,
+
 };
 
 // Utility to load textures
@@ -93,6 +281,7 @@ unsigned int loadTexture(const char* path) {
     glGenTextures(1, &textureID);
 
     int width, height, nrChannels;
+    stbi_set_flip_vertically_on_load(true);
     unsigned char* data = stbi_load(path, &width, &height, &nrChannels, 0);
     if (data) {
         GLenum format = (nrChannels == 4) ? GL_RGBA : GL_RGB;
@@ -117,6 +306,8 @@ void processInput(GLFWwindow* window) {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
 }
+
+
 
 int main() {
     // Initialize GLFW
@@ -177,9 +368,25 @@ int main() {
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
     glEnableVertexAttribArray(1);
 
+
     // Load textures
     unsigned int floorTexture = loadTexture("wood-floor-textures.jpg");
     unsigned int wallTexture = loadTexture("white-wall-textures.jpg");
+    unsigned int ceilingTexture = loadTexture("ceiling.jpg");
+
+    //Load pics
+    unsigned int image1Texture = loadTexture("adam.jpg");
+    unsigned int image2Texture = loadTexture("girlwithpearl.jpg");
+    unsigned int image3Texture = loadTexture("starry.jpg");
+    unsigned int image4Texture = loadTexture("venus.jpg");
+    unsigned int image5Texture = loadTexture("mona.jpg");
+    unsigned int image6Texture = loadTexture("nightwatch.jpg");
+    unsigned int image7Texture = loadTexture("La Grande Jatte.jpg");
+    unsigned int image8Texture = loadTexture("lastsupper.jpg");
+
+    // Variables for the rotating camera
+    float cameraAngle = 0.0f;  // Angle for rotation in radians
+    float cameraSpeed = 0.0002f; // Speed of rotation
 
     // Configure shaders
     glUseProgram(shaderProgram);
@@ -200,24 +407,113 @@ int main() {
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
+        // Calculate the new look-at direction
+        float lookX = sin(cameraAngle);
+        float lookZ = cos(cameraAngle);
+
         glm::mat4 view = glm::lookAt(
-            glm::vec3(1.0f, 0.5f, 1.0f),  // Camera position
-            glm::vec3(0.0f, 0.5f, 0.0f),  // Look at point
+            glm::vec3(0.0f, 0.5f, 0.0f),  // Camera position
+            glm::vec3(lookX, 0.5f, lookZ),  // Look at point
             glm::vec3(0.0f, 1.0f, 0.0f)   // Up direction
         );
 
         glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+
+        cameraAngle += cameraSpeed;
 
         glm::mat4 model = glm::mat4(1.0f);  // Identity matrix
         glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
         // Draw floor and ceiling
         glBindTexture(GL_TEXTURE_2D, floorTexture);
-        glDrawArrays(GL_TRIANGLES, 0, 12);
+        glDrawArrays(GL_TRIANGLES, 0, 6);
 
-        // Draw walls
+        glBindTexture(GL_TEXTURE_2D, ceilingTexture);
+        glDrawArrays(GL_TRIANGLES, 6, 6);
+
+        // Draw wall 1
         glBindTexture(GL_TEXTURE_2D, wallTexture);
-        glDrawArrays(GL_TRIANGLES, 12, 24);
+        glDrawArrays(GL_TRIANGLES, 12, 6);
+
+        // Draw wall 2
+        glBindTexture(GL_TEXTURE_2D, image1Texture);
+        glDrawArrays(GL_TRIANGLES, 18, 6);
+
+        //Draw wall 3
+        glBindTexture(GL_TEXTURE_2D, wallTexture);
+        glDrawArrays(GL_TRIANGLES, 24, 6);
+
+        //Draw wall 4
+        glBindTexture(GL_TEXTURE_2D, image2Texture);
+        glDrawArrays(GL_TRIANGLES, 30, 6);
+
+        //Draw wall 5
+        glBindTexture(GL_TEXTURE_2D, wallTexture);
+        glDrawArrays(GL_TRIANGLES, 36, 6);
+
+        //Draw wall 6
+        glBindTexture(GL_TEXTURE_2D, image3Texture);
+        glDrawArrays(GL_TRIANGLES, 42, 6);
+
+        //Draw wall 7
+        glBindTexture(GL_TEXTURE_2D, wallTexture);
+        glDrawArrays(GL_TRIANGLES, 48, 6);
+
+        //Draw wall 8
+        glBindTexture(GL_TEXTURE_2D, image4Texture);
+        glDrawArrays(GL_TRIANGLES, 54, 6);
+
+        //Draw wall 9
+        glBindTexture(GL_TEXTURE_2D, wallTexture);
+        glDrawArrays(GL_TRIANGLES, 60, 6);
+
+        //Draw wall 10
+        glBindTexture(GL_TEXTURE_2D, image5Texture);
+        glDrawArrays(GL_TRIANGLES, 72, 6);
+
+        // Draw wall 11
+        glBindTexture(GL_TEXTURE_2D, wallTexture);
+        glDrawArrays(GL_TRIANGLES, 78, 6);
+
+        // Draw wall 12
+        glBindTexture(GL_TEXTURE_2D, image6Texture);
+        glDrawArrays(GL_TRIANGLES, 84, 6);
+
+        //Draw wall 13
+        glBindTexture(GL_TEXTURE_2D, wallTexture);
+        glDrawArrays(GL_TRIANGLES, 90, 6);
+
+        //Draw wall 14
+        glBindTexture(GL_TEXTURE_2D, image7Texture);
+        glDrawArrays(GL_TRIANGLES, 96, 6);
+
+        //Draw wall 15
+        glBindTexture(GL_TEXTURE_2D, wallTexture);
+        glDrawArrays(GL_TRIANGLES, 102, 6);
+
+        //Draw wall 16
+        glBindTexture(GL_TEXTURE_2D, image8Texture);
+        glDrawArrays(GL_TRIANGLES, 108, 6);
+
+        //Draw wall 17
+        glBindTexture(GL_TEXTURE_2D, wallTexture);
+        glDrawArrays(GL_TRIANGLES, 114, 6);
+
+        //Draw wall 18
+        glBindTexture(GL_TEXTURE_2D, wallTexture);
+        glDrawArrays(GL_TRIANGLES, 120, 6);
+
+        //Draw wall 19
+        glBindTexture(GL_TEXTURE_2D, wallTexture);
+        glDrawArrays(GL_TRIANGLES, 126, 6);
+
+        //Draw wall 20
+        glBindTexture(GL_TEXTURE_2D, wallTexture);
+        glDrawArrays(GL_TRIANGLES, 132, 30);
+
+        //Draw wall 21
+        glBindTexture(GL_TEXTURE_2D, wallTexture);
+        glDrawArrays(GL_TRIANGLES, 162, 30);
 
         glfwSwapBuffers(window);
         glfwPollEvents();

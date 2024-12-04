@@ -580,7 +580,13 @@
     <None Include="dependencies\include\glm\gtx\wrap.inl" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="adam.jpg" />
     <Image Include="ceiling.jpg" />
+    <Image Include="girlwithpearl.jpg" />
+    <Image Include="La Grande Jatte.jpg" />
+    <Image Include="lastsupper.jpg" />
+    <Image Include="mona.jpg" />
+    <Image Include="nightwatch.jpg" />
     <Image Include="pictures\adam.jpg" />
     <Image Include="pictures\amegothic.jpg" />
     <Image Include="pictures\girlwithpearl.jpg" />
@@ -591,6 +597,8 @@
     <Image Include="pictures\nightwatch.jpg" />
     <Image Include="pictures\starry.jpg" />
     <Image Include="pictures\venus.jpg" />
+    <Image Include="starry.jpg" />
+    <Image Include="venus.jpg" />
     <Image Include="white-wall-textures.jpg" />
     <Image Include="wood-floor-textures.jpg" />
   </ItemGroup>
