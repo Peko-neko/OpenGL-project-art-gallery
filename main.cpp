@@ -1,5 +1,8 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 #include <iostream>
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
@@ -10,10 +13,14 @@ const char* vertexShaderSource = R"(
 layout (location = 0) in vec3 aPos;
 layout (location = 1) in vec2 aTexCoord;
 
+uniform mat4 model;
+uniform mat4 view;
+uniform mat4 projection;
+
 out vec2 TexCoord;
 
 void main() {
-    gl_Position = vec4(aPos, 1.0);
+    gl_Position = projection * view * model * vec4(aPos, 1.0);
     TexCoord = aTexCoord;
 }
 )";
@@ -35,51 +42,52 @@ void main() {
 // Vertices with texture coordinates
 float vertices[] = {
     // Floor
-    -0.5f,  0.0f, -0.5f,  0.0f, 0.0f,
-     0.5f,  0.0f, -0.5f,  1.0f, 0.0f,
-     0.5f,  0.0f,  0.5f,  1.0f, 1.0f,
-    -0.5f,  0.0f, -0.5f,  0.0f, 0.0f,
-     0.5f,  0.0f,  0.5f,  1.0f, 1.0f,
-    -0.5f,  0.0f,  0.5f,  0.0f, 1.0f,
+    -1.25f,  0.0f, -1.25f,  0.0f, 0.0f,
+     1.25f,  0.0f, -1.25f,  1.0f, 0.0f,
+     1.25f,  0.0f,  1.25f,  1.0f, 1.0f,
+    -1.25f,  0.0f, -1.25f,  0.0f, 0.0f,
+     1.25f,  0.0f,  1.25f,  1.0f, 1.0f,
+    -1.25f,  0.0f,  1.25f,  0.0f, 1.0f,
 
     // Ceiling
-    -0.5f,  1.0f, -0.5f,  0.0f, 0.0f,
-     0.5f,  1.0f, -0.5f,  1.0f, 0.0f,
-     0.5f,  1.0f,  0.5f,  1.0f, 1.0f,
-    -0.5f,  1.0f, -0.5f,  0.0f, 0.0f,
-     0.5f,  1.0f,  0.5f,  1.0f, 1.0f,
-    -0.5f,  1.0f,  0.5f,  0.0f, 1.0f,
+    -1.25f,  1.0f, -1.25f,  0.0f, 0.0f,
+     1.25f,  1.0f, -1.25f,  1.0f, 0.0f,
+     1.25f,  1.0f,  1.25f,  1.0f, 1.0f,
+    -1.25f,  1.0f, -1.25f,  0.0f, 0.0f,
+     1.25f,  1.0f,  1.25f,  1.0f, 1.0f,
+    -1.25f,  1.0f,  1.25f,  0.0f, 1.0f,
 
     // Walls
-    -0.5f,  0.0f, -0.5f,  0.0f, 0.0f,
-    -0.5f,  1.0f, -0.5f,  0.0f, 1.0f,
-     0.5f,  1.0f, -0.5f,  1.0f, 1.0f,
-    -0.5f,  0.0f, -0.5f,  0.0f, 0.0f,
-     0.5f,  1.0f, -0.5f,  1.0f, 1.0f,
-     0.5f,  0.0f, -0.5f,  1.0f, 0.0f,
+    -1.25f,  0.0f, -1.25f,  0.0f, 0.0f,
+    -1.25f,  1.0f, -1.25f,  0.0f, 1.0f,
+     1.25f,  1.0f, -1.25f,  1.0f, 1.0f,
+    -1.25f,  0.0f, -1.25f,  0.0f, 0.0f,
+     1.25f,  1.0f, -1.25f,  1.0f, 1.0f,
+     1.25f,  0.0f, -1.25f,  1.0f, 0.0f,
 
-     0.5f,  0.0f, -0.5f,  0.0f, 0.0f,
-     0.5f,  1.0f, -0.5f,  0.0f, 1.0f,
-     0.5f,  1.0f,  0.5f,  1.0f, 1.0f,
-     0.5f,  0.0f, -0.5f,  0.0f, 0.0f,
-     0.5f,  1.0f,  0.5f,  1.0f, 1.0f,
-     0.5f,  0.0f,  0.5f,  1.0f, 0.0f,
+     1.25f,  0.0f, -1.25f,  0.0f, 0.0f,
+     1.25f,  1.0f, -1.25f,  0.0f, 1.0f,
+     1.25f,  1.0f,  1.25f,  1.0f, 1.0f,
+     1.25f,  0.0f, -1.25f,  0.0f, 0.0f,
+     1.25f,  1.0f,  1.25f,  1.0f, 1.0f,
+     1.25f,  0.0f,  1.25f,  1.0f, 0.0f,
 
-     0.5f,  0.0f,  0.5f,  0.0f, 0.0f,
-     0.5f,  1.0f,  0.5f,  0.0f, 1.0f,
-    -0.5f,  1.0f,  0.5f,  1.0f, 1.0f,
-     0.5f,  0.0f,  0.5f,  0.0f, 0.0f,
-    -0.5f,  1.0f,  0.5f,  1.0f, 1.0f,
-    -0.5f,  0.0f,  0.5f,  1.0f, 0.0f,
+     1.25f,  0.0f,  1.25f,  0.0f, 0.0f,
+     1.25f,  1.0f,  1.25f,  0.0f, 1.0f,
+    -1.25f,  1.0f,  1.25f,  1.0f, 1.0f,
+     1.25f,  0.0f,  1.25f,  0.0f, 0.0f,
+    -1.25f,  1.0f,  1.25f,  1.0f, 1.0f,
+    -1.25f,  0.0f,  1.25f,  1.0f, 0.0f,
 
-    -0.5f,  0.0f,  0.5f,  0.0f, 0.0f,
-    -0.5f,  1.0f,  0.5f,  0.0f, 1.0f,
-    -0.5f,  1.0f, -0.5f,  1.0f, 1.0f,
-    -0.5f,  0.0f,  0.5f,  0.0f, 0.0f,
-    -0.5f,  1.0f, -0.5f,  1.0f, 1.0f,
-    -0.5f,  0.0f, -0.5f,  1.0f, 0.0f
+    -1.25f,  0.0f,  1.25f,  0.0f, 0.0f,
+    -1.25f,  1.0f,  1.25f,  0.0f, 1.0f,
+    -1.25f,  1.0f, -1.25f,  1.0f, 1.0f,
+    -1.25f,  0.0f,  1.25f,  0.0f, 0.0f,
+    -1.25f,  1.0f, -1.25f,  1.0f, 1.0f,
+    -1.25f,  0.0f, -1.25f,  1.0f, 0.0f
 };
 
+// Utility to load textures
 unsigned int loadTexture(const char* path) {
     unsigned int textureID;
     glGenTextures(1, &textureID);
@@ -104,6 +112,7 @@ unsigned int loadTexture(const char* path) {
     return textureID;
 }
 
+// Utility to process input
 void processInput(GLFWwindow* window) {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
@@ -172,17 +181,35 @@ int main() {
     unsigned int floorTexture = loadTexture("wood-floor-textures.jpg");
     unsigned int wallTexture = loadTexture("white-wall-textures.jpg");
 
+    // Configure shaders
     glUseProgram(shaderProgram);
-    glUniform1i(glGetUniformLocation(shaderProgram, "texture1"), 0);
 
-    // Render loop
+    // Uniform locations
+    int modelLoc = glGetUniformLocation(shaderProgram, "model");
+    int viewLoc = glGetUniformLocation(shaderProgram, "view");
+    int projLoc = glGetUniformLocation(shaderProgram, "projection");
+
+    // Projection matrix
+    glm::mat4 projection = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
+    glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
+
+    // Rendering loop
     while (!glfwWindowShouldClose(window)) {
         processInput(window);
 
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        glBindVertexArray(VAO);
+        glm::mat4 view = glm::lookAt(
+            glm::vec3(1.0f, 0.5f, 1.0f),  // Camera position
+            glm::vec3(0.0f, 0.5f, 0.0f),  // Look at point
+            glm::vec3(0.0f, 1.0f, 0.0f)   // Up direction
+        );
+
+        glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+
+        glm::mat4 model = glm::mat4(1.0f);  // Identity matrix
+        glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
         // Draw floor and ceiling
         glBindTexture(GL_TEXTURE_2D, floorTexture);
@@ -195,7 +222,6 @@ int main() {
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
-
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
     glDeleteTextures(1, &floorTexture);
