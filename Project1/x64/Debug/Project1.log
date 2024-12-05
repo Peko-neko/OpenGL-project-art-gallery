@@ -1,2 +1,18 @@
 ﻿  main.cpp
-  Project1.vcxproj -> D:\CompGraphic\Project1_Art\OpenGL-art-gallery\x64\Debug\Project1.exe
+D:\CompGraphic\Project1_Art\Project1_Art2\main.cpp(458,41): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+D:\CompGraphic\Project1_Art\Project1_Art2\main.cpp(458,41): warning C4244:         with
+D:\CompGraphic\Project1_Art\Project1_Art2\main.cpp(458,41): warning C4244:         [
+D:\CompGraphic\Project1_Art\Project1_Art2\main.cpp(458,41): warning C4244:             T=float
+D:\CompGraphic\Project1_Art\Project1_Art2\main.cpp(458,41): warning C4244:         ]
+D:\CompGraphic\Project1_Art\Project1_Art2\main.cpp(459,41): warning C4244: '=': conversion from 'double' to 'T', possible loss of data
+D:\CompGraphic\Project1_Art\Project1_Art2\main.cpp(459,41): warning C4244:         with
+D:\CompGraphic\Project1_Art\Project1_Art2\main.cpp(459,41): warning C4244:         [
+D:\CompGraphic\Project1_Art\Project1_Art2\main.cpp(459,41): warning C4244:             T=float
+D:\CompGraphic\Project1_Art\Project1_Art2\main.cpp(459,41): warning C4244:         ]
+  Shader.cpp
+D:\CompGraphic\Project1_Art\Project1_Art2\Shader.cpp(32,36): warning C4101: 'e': unreferenced local variable
+  Generating Code...
+  glad.c
+Project1\x64\Debug\glm.obj : warning LNK4042: object specified more than once; extras ignored
+LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
+  Project1.vcxproj -> D:\CompGraphic\Project1_Art\Project1_Art2\x64\Debug\Project1.exe

@@ -1,0 +1,53 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\CompGraphic\\Project1_Art\\Project1_Art2\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B6E7FCDA-1DAB-49F2-9F7E-352ECCCA1FD2}|Project1.vcxproj|D:\\CompGraphic\\Project1_Art\\Project1_Art2\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B6E7FCDA-1DAB-49F2-9F7E-352ECCCA1FD2}|Project1.vcxproj|solutionrelative:main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B6E7FCDA-1DAB-49F2-9F7E-352ECCCA1FD2}|Project1.vcxproj|D:\\CompGraphic\\Project1_Art\\Project1_Art2\\dependencies\\include\\glm\\glm.cppm||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B6E7FCDA-1DAB-49F2-9F7E-352ECCCA1FD2}|Project1.vcxproj|solutionrelative:dependencies\\include\\glm\\glm.cppm||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "glm.cppm",
+              "DocumentMoniker": "D:\\CompGraphic\\Project1_Art\\Project1_Art2\\dependencies\\include\\glm\\glm.cppm",
+              "RelativeDocumentMoniker": "dependencies\\include\\glm\\glm.cppm",
+              "ToolTip": "D:\\CompGraphic\\Project1_Art\\Project1_Art2\\dependencies\\include\\glm\\glm.cppm",
+              "RelativeToolTip": "dependencies\\include\\glm\\glm.cppm",
+              "ViewState": "AgIAADwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001913|",
+              "WhenOpened": "2024-12-05T16:03:31.048Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "main.cpp",
+              "DocumentMoniker": "D:\\CompGraphic\\Project1_Art\\Project1_Art2\\main.cpp",
+              "RelativeDocumentMoniker": "main.cpp",
+              "ToolTip": "D:\\CompGraphic\\Project1_Art\\Project1_Art2\\main.cpp",
+              "RelativeToolTip": "main.cpp",
+              "ViewState": "AgIAABcCAAAAAAAAAAAmwDUCAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-12-05T16:03:09.936Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
