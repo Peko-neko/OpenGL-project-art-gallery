@@ -6,6 +6,7 @@
 #include <iostream>
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
+#include <string>
 
 // Vertex Shader source
 const char* vertexShaderSource = R"(
@@ -35,23 +36,37 @@ in vec2 TexCoord;
 uniform sampler2D texture1;
 
 // Lighting uniforms
-uniform vec3 lightPos;
+uniform vec3 lightPositions[4]; // Up to 4 lights
+uniform vec3 lightColors[4];    // Corresponding colors
 uniform vec3 viewPos;
-uniform vec3 lightColor;
 
 void main() {
+    vec3 result = vec3(0.0); // Accumulated light result
+
     // Ambient lighting
-    float ambientStrength = 0.2;
-    vec3 ambient = ambientStrength * lightColor;
+    float ambientStrength = 0.09; // Reduced ambient lighting
+    vec3 ambient = vec3(0.0);
 
-    // Diffuse lighting
-    vec3 norm = vec3(0.0, 1.0, 0.0); // Assuming flat surfaces facing up
-    vec3 lightDir = normalize(lightPos - vec3(0.0, 0.5, 0.0)); // Light relative to center
-    float diff = max(dot(norm, lightDir), 0.0);
-    vec3 diffuse = diff * lightColor;
+    for (int i = 0; i < 4; i++) {
+        // Add ambient lighting for this light
+        ambient += ambientStrength * lightColors[i];
 
-    // Combine lighting with texture
-    vec3 result = (ambient + diffuse);
+        // Diffuse lighting
+        vec3 norm = vec3(0.0, 1.0, 0.0); // Assuming flat surfaces facing up
+        vec3 lightDir = normalize(lightPositions[i] - vec3(0.0, 0.5, 0.0)); // Replace with fragment position if needed
+        float diff = max(dot(norm, lightDir), 0.0);
+
+        // Optional: Add attenuation for more realistic lighting
+        float distance = length(lightPositions[i] - vec3(0.0, 0.5, 0.0));
+        float attenuation = 1.0 / (1.0 + 0.09 * distance + 0.032 * (distance * distance));
+
+        vec3 diffuse = diff * lightColors[i] * attenuation * 0.5; // Dim diffuse lighting by 50%
+
+        // Add this light's contribution to the result
+        result += ambient + diffuse;
+    }
+
+    // Combine lighting result with texture
     FragColor = vec4(result, 1.0) * texture(texture1, TexCoord);
 }
 )";
@@ -338,7 +353,7 @@ int main() {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    GLFWwindow* window = glfwCreateWindow(800, 600, "OpenGL Textured Room", nullptr, nullptr);
+    GLFWwindow* window = glfwCreateWindow(800, 600, "OpenGL mini art gallery", nullptr, nullptr);
     if (!window) {
         std::cerr << "Failed to create GLFW window" << std::endl;
         glfwTerminate();
@@ -385,6 +400,19 @@ int main() {
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
     glEnableVertexAttribArray(1);
 
+    glm::vec3 lightPositions[] = {
+        glm::vec3(2.0f, 0.9f, 2.0f),
+        glm::vec3(-2.0f, 0.9f, 2.0f),
+        glm::vec3(2.0f, 0.9f, -2.0f),
+        glm::vec3(-2.0f, 0.9f, -2.0f)
+    };
+
+    glm::vec3 lightColors[] = {
+        glm::vec3(1.0f, 0.0f, 0.0f), // Red
+        glm::vec3(0.0f, 1.0f, 0.0f), // Green
+        glm::vec3(0.0f, 0.0f, 0.5f), // Blue
+        glm::vec3(1.5f, 1.5f, 1.5f)  // White
+    };
 
     // Load textures
     unsigned int floorTexture = loadTexture("wood-floor-textures.jpg");
@@ -430,6 +458,15 @@ int main() {
     glUniform3fv(lightColorLoc, 1, glm::value_ptr(lightColor));
     glUniform3fv(viewPosLoc, 1, glm::value_ptr(viewPos));
 
+    for (int i = 0; i < 4; i++) {
+        std::string lightPosUniform = "lightPositions[" + std::to_string(i) + "]";
+        std::string lightColorUniform = "lightColors[" + std::to_string(i) + "]";
+
+        glUniform3fv(glGetUniformLocation(shaderProgram, lightPosUniform.c_str()), 1, glm::value_ptr(lightPositions[i]));
+        glUniform3fv(glGetUniformLocation(shaderProgram, lightColorUniform.c_str()), 1, glm::value_ptr(lightColors[i]));
+    }
+
+
 
     // Rendering loop
     while (!glfwWindowShouldClose(window)) {
@@ -459,6 +496,15 @@ int main() {
         lightPos.z = cos(glfwGetTime()) * 2.0f;
 
         glUniform3fv(lightPosLoc, 1, glm::value_ptr(lightPos));
+
+        for (int i = 0; i < 4; i++) {
+            lightPositions[i].x = cos(glfwGetTime() + i) * 2.0f; // Circular motion
+            lightPositions[i].z = sin(glfwGetTime() + i) * 2.0f;
+
+            std::string lightPosUniform = "lightPositions[" + std::to_string(i) + "]";
+            glUniform3fv(glGetUniformLocation(shaderProgram, lightPosUniform.c_str()), 1, glm::value_ptr(lightPositions[i]));
+        }
+
 
 
         // Draw floor and ceiling
