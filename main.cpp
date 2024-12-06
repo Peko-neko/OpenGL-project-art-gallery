@@ -347,6 +347,7 @@ Camera camera(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90.0f, 
 bool keys[1024];
 float lastX = 400, lastY = 300;
 bool firstMouse = true;
+bool rightMouseButtonPressed = false;
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode) {
     if (action == GLFW_PRESS)
@@ -362,15 +363,28 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos) {
         firstMouse = false;
     }
 
-    float xoffset = xpos - lastX;
-    float yoffset = lastY - ypos;
-    lastX = xpos;
-    lastY = ypos;
+    if (rightMouseButtonPressed) {
+        float xoffset = xpos - lastX;
+        float yoffset = lastY - ypos;
+        lastX = xpos;
+        lastY = ypos;
 
-    camera.ProcessMouseMovement(xoffset, yoffset);
+        camera.ProcessMouseMovement(xoffset, yoffset);
+    } else {
+        lastX = xpos;
+        lastY = ypos;
+    }
 }
 
-
+void mouse_button_callback(GLFWwindow* window, int button, int action, int mods) {
+    if (button == GLFW_MOUSE_BUTTON_RIGHT) {
+        if (action == GLFW_PRESS) {
+            rightMouseButtonPressed = true;
+        } else if (action == GLFW_RELEASE) {
+            rightMouseButtonPressed = false;
+        }
+    }
+}
 
 int main() {
     // Initialize GLFW
@@ -398,10 +412,12 @@ int main() {
         return -1;
     }
 
+    float lastFrame = 0.0f;
+
     // Set callbacks
     glfwSetKeyCallback(window, key_callback);
     glfwSetCursorPosCallback(window, mouse_callback);
-    float lastFrame = 0.0f;
+    glfwSetMouseButtonCallback(window, mouse_button_callback);
 
     // Compile shaders
     unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
