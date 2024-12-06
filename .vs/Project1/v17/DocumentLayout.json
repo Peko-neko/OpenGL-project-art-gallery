@@ -7,6 +7,10 @@
       "RelativeMoniker": "D:0:0:{B6E7FCDA-1DAB-49F2-9F7E-352ECCCA1FD2}|Project1.vcxproj|solutionrelative:main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\CompGraphic\\Project1_Art\\Project1_Art2\\dependencies\\include\\glm\\CMakeLists.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:dependencies\\include\\glm\\CMakeLists.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{B6E7FCDA-1DAB-49F2-9F7E-352ECCCA1FD2}|Project1.vcxproj|D:\\CompGraphic\\Project1_Art\\Project1_Art2\\camera.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{B6E7FCDA-1DAB-49F2-9F7E-352ECCCA1FD2}|Project1.vcxproj|solutionrelative:camera.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
@@ -17,10 +21,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{B6E7FCDA-1DAB-49F2-9F7E-352ECCCA1FD2}|Project1.vcxproj|D:\\CompGraphic\\Project1_Art\\Project1_Art2\\glad.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{B6E7FCDA-1DAB-49F2-9F7E-352ECCCA1FD2}|Project1.vcxproj|solutionrelative:glad.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B6E7FCDA-1DAB-49F2-9F7E-352ECCCA1FD2}|Project1.vcxproj|D:\\CompGraphic\\Project1_Art\\Project1_Art2\\dependencies\\include\\glm\\glm.cppm||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{B6E7FCDA-1DAB-49F2-9F7E-352ECCCA1FD2}|Project1.vcxproj|solutionrelative:dependencies\\include\\glm\\glm.cppm||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,7 +34,20 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
+              "Title": "CMakeLists.txt",
+              "DocumentMoniker": "D:\\CompGraphic\\Project1_Art\\Project1_Art2\\dependencies\\include\\glm\\CMakeLists.txt",
+              "RelativeDocumentMoniker": "dependencies\\include\\glm\\CMakeLists.txt",
+              "ToolTip": "D:\\CompGraphic\\Project1_Art\\Project1_Art2\\dependencies\\include\\glm\\CMakeLists.txt",
+              "RelativeToolTip": "dependencies\\include\\glm\\CMakeLists.txt",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2024-12-06T13:42:33.419Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "camera.h",
               "DocumentMoniker": "D:\\CompGraphic\\Project1_Art\\Project1_Art2\\camera.h",
               "RelativeDocumentMoniker": "camera.h",
@@ -42,12 +55,11 @@
               "RelativeToolTip": "camera.h",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-12-06T12:24:14.216Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-06T12:24:14.216Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "glad.c",
               "DocumentMoniker": "D:\\CompGraphic\\Project1_Art\\Project1_Art2\\glad.c",
               "RelativeDocumentMoniker": "glad.c",
@@ -55,33 +67,19 @@
               "RelativeToolTip": "glad.c",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
-              "WhenOpened": "2024-12-06T12:15:23.576Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-06T12:15:23.576Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "camera.cpp",
               "DocumentMoniker": "D:\\CompGraphic\\Project1_Art\\Project1_Art2\\camera.cpp",
               "RelativeDocumentMoniker": "camera.cpp",
               "ToolTip": "D:\\CompGraphic\\Project1_Art\\Project1_Art2\\camera.cpp",
               "RelativeToolTip": "camera.cpp",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAAB0AAAAgAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADIAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-12-06T12:11:49.042Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "glm.cppm",
-              "DocumentMoniker": "D:\\CompGraphic\\Project1_Art\\Project1_Art2\\dependencies\\include\\glm\\glm.cppm",
-              "RelativeDocumentMoniker": "dependencies\\include\\glm\\glm.cppm",
-              "ToolTip": "D:\\CompGraphic\\Project1_Art\\Project1_Art2\\dependencies\\include\\glm\\glm.cppm",
-              "RelativeToolTip": "dependencies\\include\\glm\\glm.cppm",
-              "ViewState": "AgIAADwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001913|",
-              "WhenOpened": "2024-12-05T16:03:31.048Z"
+              "WhenOpened": "2024-12-06T12:11:49.042Z"
             },
             {
               "$type": "Document",
@@ -91,7 +89,7 @@
               "RelativeDocumentMoniker": "main.cpp",
               "ToolTip": "D:\\CompGraphic\\Project1_Art\\Project1_Art2\\main.cpp",
               "RelativeToolTip": "main.cpp",
-              "ViewState": "AgIAAOYBAAAAAAAAAAAAAPsBAAADAAAAAAAAAA==",
+              "ViewState": "AgIAAFkCAAAAAAAAAAAAAGkCAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-12-05T16:03:09.936Z",
               "EditorCaption": ""

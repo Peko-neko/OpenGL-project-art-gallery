@@ -24,9 +24,6 @@
     <ClCompile Include="dependencies\include\glm\detail\glm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="dependencies\include\glm\glm.cppm">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Shader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -1340,6 +1337,7 @@
       <Filter>Header Files</Filter>
     </None>
     <None Include=".gitattributes" />
+    <None Include="chand\Dream SP6.mtl" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="white-wall-textures.jpg">
@@ -1405,5 +1403,21 @@
     <Image Include="venus.jpg">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="chand\textures\Glass base.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="chand\textures\Metal base.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="chand\Dream SP6.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="chand\Dream SP6_02.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="chand\Dream SP6.obj" />
+    <Object Include="chand\chand.obj" />
   </ItemGroup>
 </Project>

@@ -135,7 +135,6 @@
   <ItemGroup>
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="dependencies\include\glm\detail\glm.cpp" />
-    <ClCompile Include="dependencies\include\glm\glm.cppm" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Shader.cpp" />
@@ -442,6 +441,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitattributes" />
+    <None Include="chand\Dream SP6.mtl" />
     <None Include="dependencies\include\glm\detail\func_common.inl" />
     <None Include="dependencies\include\glm\detail\func_common_simd.inl" />
     <None Include="dependencies\include\glm\detail\func_exponential.inl" />
@@ -584,6 +584,10 @@
   <ItemGroup>
     <Image Include="adam.jpg" />
     <Image Include="ceiling.jpg" />
+    <Image Include="chand\Dream SP6.jpg" />
+    <Image Include="chand\Dream SP6_02.jpg" />
+    <Image Include="chand\textures\Glass base.jpg" />
+    <Image Include="chand\textures\Metal base.jpg" />
     <Image Include="girlwithpearl.jpg" />
     <Image Include="La Grande Jatte.jpg" />
     <Image Include="lastsupper.jpg" />
