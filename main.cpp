@@ -7,6 +7,7 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 #include <string>
+#include "Camera.h"
 
 // Vertex Shader source
 const char* vertexShaderSource = R"(
@@ -339,6 +340,36 @@ void processInput(GLFWwindow* window) {
         glfwSetWindowShouldClose(window, true);
 }
 
+// Initialize camera
+
+Camera camera(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
+
+bool keys[1024];
+float lastX = 400, lastY = 300;
+bool firstMouse = true;
+
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode) {
+    if (action == GLFW_PRESS)
+        keys[key] = true;
+    else if (action == GLFW_RELEASE)
+        keys[key] = false;
+}
+
+void mouse_callback(GLFWwindow* window, double xpos, double ypos) {
+    if (firstMouse) {
+        lastX = xpos;
+        lastY = ypos;
+        firstMouse = false;
+    }
+
+    float xoffset = xpos - lastX;
+    float yoffset = lastY - ypos;
+    lastX = xpos;
+    lastY = ypos;
+
+    camera.ProcessMouseMovement(xoffset, yoffset);
+}
+
 
 
 int main() {
@@ -366,6 +397,10 @@ int main() {
         std::cerr << "Failed to initialize GLAD" << std::endl;
         return -1;
     }
+
+    // Set callbacks
+    glfwSetKeyCallback(window, key_callback);
+    glfwSetCursorPosCallback(window, mouse_callback);
 
     // Compile shaders
     unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
@@ -472,22 +507,32 @@ int main() {
     while (!glfwWindowShouldClose(window)) {
         processInput(window);
 
+        float currentFrame = glfwGetTime();
+        float deltaTime = currentFrame - lastFrame;
+        lastFrame = currentFrame;
+
+        // Process input
+        camera.ProcessKeyboard(keys, deltaTime);
+
+        // Update view matrix
+        glm::mat4 view = camera.GetViewMatrix();
+
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        // Calculate the new look-at direction
-        float lookX = sin(cameraAngle);
-        float lookZ = cos(cameraAngle);
+        // // Calculate the new look-at direction
+        // float lookX = sin(cameraAngle);
+        // float lookZ = cos(cameraAngle);
 
-        glm::mat4 view = glm::lookAt(
-            glm::vec3(0.0f, 0.5f, 0.0f),  // Camera position
-            glm::vec3(lookX, 0.5f, lookZ),  // Look at point
-            glm::vec3(0.0f, 1.0f, 0.0f)   // Up direction
-        );
+        // glm::mat4 view = glm::lookAt(
+        //     glm::vec3(0.0f, 0.5f, 0.0f),  // Camera position
+        //     glm::vec3(lookX, 0.5f, lookZ),  // Look at point
+        //     glm::vec3(0.0f, 1.0f, 0.0f)   // Up direction
+        // );
 
-        glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+        // glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
 
-        cameraAngle += cameraSpeed;
+        // cameraAngle += cameraSpeed;
 
         glm::mat4 model = glm::mat4(1.0f);  // Identity matrix
         glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
