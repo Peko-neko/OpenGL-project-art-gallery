@@ -12,7 +12,7 @@
 #include <string>
 #include "Camera.h"
 
-// Vertex Shader source
+// Vertex Shader source.
 const char* vertexShaderSource = R"(
 #version 330 core
 layout (location = 0) in vec3 aPos;
