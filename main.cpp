@@ -75,99 +75,6 @@ void main() {
 }
 )";
 
-struct Vertex {
-    glm::vec3 position;
-    glm::vec3 normal;
-    glm::vec2 texCoords;
-};
-
-struct Mesh {
-    std::vector<Vertex> vertices;
-    std::vector<unsigned int> indices;
-    unsigned int VAO, VBO, EBO;
-};
-
-Mesh loadOBJ(const std::string& filepath) {
-    std::vector<glm::vec3> temp_positions;
-    std::vector<glm::vec3> temp_normals;
-    std::vector<glm::vec2> temp_texCoords;
-    std::vector<unsigned int> position_indices, normal_indices, texCoord_indices;
-
-    Mesh mesh;
-
-    std::ifstream file(filepath);
-    if (!file.is_open()) {
-        std::cerr << "Failed to open file: " << filepath << std::endl;
-        exit(EXIT_FAILURE);
-    }
-
-    std::string line;
-    while (std::getline(file, line)) {
-        std::istringstream iss(line);
-        std::string prefix;
-        iss >> prefix;
-
-        if (prefix == "v") { // Vertex position
-            glm::vec3 position;
-            iss >> position.x >> position.y >> position.z;
-            temp_positions.push_back(position);
-        } else if (prefix == "vn") { // Vertex normal
-            glm::vec3 normal;
-            iss >> normal.x >> normal.y >> normal.z;
-            temp_normals.push_back(normal);
-        } else if (prefix == "vt") { // Texture coordinate
-            glm::vec2 texCoord;
-            iss >> texCoord.x >> texCoord.y;
-            temp_texCoords.push_back(texCoord);
-        } else if (prefix == "f") { // Face
-            unsigned int pIdx[3], tIdx[3], nIdx[3];
-            char slash;
-            for (int i = 0; i < 3; i++) {
-                iss >> pIdx[i] >> slash >> tIdx[i] >> slash >> nIdx[i];
-                position_indices.push_back(pIdx[i] - 1); // OBJ indices are 1-based
-                texCoord_indices.push_back(tIdx[i] - 1);
-                normal_indices.push_back(nIdx[i] - 1);
-            }
-        }
-    }
-
-    // Create vertices
-    for (size_t i = 0; i < position_indices.size(); i++) {
-        Vertex vertex;
-        vertex.position = temp_positions[position_indices[i]];
-        vertex.normal = temp_normals[normal_indices[i]];
-        vertex.texCoords = temp_texCoords[texCoord_indices[i]];
-        mesh.vertices.push_back(vertex);
-        mesh.indices.push_back(i);
-    }
-
-    // Generate OpenGL buffers
-    glGenVertexArrays(1, &mesh.VAO);
-    glGenBuffers(1, &mesh.VBO);
-    glGenBuffers(1, &mesh.EBO);
-
-    glBindVertexArray(mesh.VAO);
-
-    glBindBuffer(GL_ARRAY_BUFFER, mesh.VBO);
-    glBufferData(GL_ARRAY_BUFFER, mesh.vertices.size() * sizeof(Vertex), &mesh.vertices[0], GL_STATIC_DRAW);
-
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh.EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, mesh.indices.size() * sizeof(unsigned int), &mesh.indices[0], GL_STATIC_DRAW);
-
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, position));
-    glEnableVertexAttribArray(0);
-
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, normal));
-    glEnableVertexAttribArray(1);
-
-    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, texCoords));
-    glEnableVertexAttribArray(2);
-
-    glBindVertexArray(0);
-
-    return mesh;
-}
-
 // Vertices with texture coordinates
 float vertices[] = {
     // Floor (5x larger)
@@ -482,12 +389,6 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
     }
 }
 
-void renderMesh(const Mesh& mesh, GLuint shaderProgram) {
-    glUseProgram(shaderProgram);
-    glBindVertexArray(mesh.VAO);
-    glDrawElements(GL_TRIANGLES, mesh.indices.size(), GL_UNSIGNED_INT, 0);
-    glBindVertexArray(0);
-}
 
 int main() {
     // Initialize GLFW
@@ -621,8 +522,6 @@ int main() {
         glUniform3fv(glGetUniformLocation(shaderProgram, lightColorUniform.c_str()), 1, glm::value_ptr(lightColors[i]));
     }
 
-    Mesh modeld = loadOBJ("chand/chand.obj");
-
     // Enable depth testing
     glEnable(GL_DEPTH_TEST);
 
@@ -649,8 +548,6 @@ int main() {
 
         glm::mat4 model = glm::mat4(1.0f);  // Identity matrix
         glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-
-        renderMesh(modeld, shaderProgram);
 
         lightPos.x = sin(glfwGetTime()) * 2.0f;
         lightPos.z = cos(glfwGetTime()) * 2.0f;
