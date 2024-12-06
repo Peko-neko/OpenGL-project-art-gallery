@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "D:\\CompGraphic\\Project1_Art\\Project1_Art2\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{B6E7FCDA-1DAB-49F2-9F7E-352ECCCA1FD2}|Project1.vcxproj|D:\\CompGraphic\\Project1_Art\\Project1_Art2\\camera.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B6E7FCDA-1DAB-49F2-9F7E-352ECCCA1FD2}|Project1.vcxproj|solutionrelative:camera.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{B6E7FCDA-1DAB-49F2-9F7E-352ECCCA1FD2}|Project1.vcxproj|D:\\CompGraphic\\Project1_Art\\Project1_Art2\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{B6E7FCDA-1DAB-49F2-9F7E-352ECCCA1FD2}|Project1.vcxproj|solutionrelative:main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
@@ -18,11 +22,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
+              "Title": "camera.cpp",
+              "DocumentMoniker": "D:\\CompGraphic\\Project1_Art\\Project1_Art2\\camera.cpp",
+              "RelativeDocumentMoniker": "camera.cpp",
+              "ToolTip": "D:\\CompGraphic\\Project1_Art\\Project1_Art2\\camera.cpp",
+              "RelativeToolTip": "camera.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-12-06T12:11:49.042Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "glm.cppm",
               "DocumentMoniker": "D:\\CompGraphic\\Project1_Art\\Project1_Art2\\dependencies\\include\\glm\\glm.cppm",
               "RelativeDocumentMoniker": "dependencies\\include\\glm\\glm.cppm",
@@ -34,13 +51,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "main.cpp",
               "DocumentMoniker": "D:\\CompGraphic\\Project1_Art\\Project1_Art2\\main.cpp",
               "RelativeDocumentMoniker": "main.cpp",
               "ToolTip": "D:\\CompGraphic\\Project1_Art\\Project1_Art2\\main.cpp",
               "RelativeToolTip": "main.cpp",
-              "ViewState": "AgIAABcCAAAAAAAAAAAmwDUCAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-12-05T16:03:09.936Z",
               "EditorCaption": ""
