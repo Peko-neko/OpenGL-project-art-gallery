@@ -133,6 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="camera.cpp" />
     <ClCompile Include="dependencies\include\glm\detail\glm.cpp" />
     <ClCompile Include="dependencies\include\glm\glm.cppm" />
     <ClCompile Include="glad.c" />
@@ -140,6 +141,7 @@
     <ClCompile Include="Shader.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="camera.h" />
     <ClInclude Include="dependencies\include\glad\glad.h" />
     <ClInclude Include="dependencies\include\GLFW\glfw3.h" />
     <ClInclude Include="dependencies\include\GLFW\glfw3native.h" />
