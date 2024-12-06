@@ -1,2 +1,1 @@
-﻿LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
-  Project1.vcxproj -> D:\CompGraphic\Project1_Art\Project1_Art2\x64\Debug\Project1.exe
+﻿
