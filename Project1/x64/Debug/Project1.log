@@ -7,6 +7,7 @@ D:\CompGraphic\Project1_Art\Project1_Art2\main.cpp(431,17): warning C4244: '=': 
 D:\CompGraphic\Project1_Art\Project1_Art2\main.cpp(432,17): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 D:\CompGraphic\Project1_Art\Project1_Art2\main.cpp(436,17): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 D:\CompGraphic\Project1_Art\Project1_Art2\main.cpp(437,17): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\CompGraphic\Project1_Art\Project1_Art2\main.cpp(615,32): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\CompGraphic\Project1_Art\Project1_Art2\main.cpp(619,32): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\CompGraphic\Project1_Art\Project1_Art2\main.cpp(731,25): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
   Project1.vcxproj -> D:\CompGraphic\Project1_Art\Project1_Art2\x64\Debug\Project1.exe

@@ -1415,9 +1415,11 @@
     <Image Include="chand\Dream SP6_02.jpg">
       <Filter>Resource Files</Filter>
     </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <Object Include="chand\Dream SP6.obj" />
-    <Object Include="chand\chand.obj" />
+    <Image Include="Masterpiece.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="white-gold-marble.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

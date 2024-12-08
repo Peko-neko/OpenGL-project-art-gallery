@@ -322,52 +322,52 @@ float standVertices[] = {
     -0.5f, 0.0f,  0.5f,       0.0f, 1.0f,
 
     // Top face
-    -0.5f, 0.4f, -0.5f,       0.0f, 0.0f,
-     0.5f, 0.4f, -0.5f,       1.0f, 0.0f,
-     0.5f, 0.4f,  0.5f,       1.0f, 1.0f,
-    -0.5f, 0.4f, -0.5f,       0.0f, 0.0f,
-     0.5f, 0.4f,  0.5f,       1.0f, 1.0f,
-    -0.5f, 0.4f,  0.5f,       0.0f, 1.0f,
+    -0.5f, 0.3f, -0.5f,       0.0f, 0.0f,
+     0.5f, 0.3f, -0.5f,       1.0f, 0.0f,
+     0.5f, 0.3f,  0.5f,       1.0f, 1.0f,
+    -0.5f, 0.3f, -0.5f,       0.0f, 0.0f,
+     0.5f, 0.3f,  0.5f,       1.0f, 1.0f,
+    -0.5f, 0.3f,  0.5f,       0.0f, 1.0f,
 
     // Front face
     -0.5f, 0.0f,  0.5f,       0.0f, 0.0f,
      0.5f, 0.0f,  0.5f,       1.0f, 0.0f,
-     0.5f, 0.4f,  0.5f,       1.0f, 1.0f,
+     0.5f, 0.3f,  0.5f,       1.0f, 1.0f,
     -0.5f, 0.0f,  0.5f,       0.0f, 0.0f,
-     0.5f, 0.4f,  0.5f,       1.0f, 1.0f,
-    -0.5f, 0.4f,  0.5f,       0.0f, 1.0f,
+     0.5f, 0.3f,  0.5f,       1.0f, 1.0f,
+    -0.5f, 0.3f,  0.5f,       0.0f, 1.0f,
 
     // Back face
     -0.5f, 0.0f, -0.5f,       0.0f, 0.0f,
      0.5f, 0.0f, -0.5f,       1.0f, 0.0f,
-     0.5f, 0.4f, -0.5f,       1.0f, 1.0f,
+     0.5f, 0.3f, -0.5f,       1.0f, 1.0f,
     -0.5f, 0.0f, -0.5f,       0.0f, 0.0f,
-     0.5f, 0.4f, -0.5f,       1.0f, 1.0f,
-    -0.5f, 0.4f, -0.5f,       0.0f, 1.0f,
+     0.5f, 0.3f, -0.5f,       1.0f, 1.0f,
+    -0.5f, 0.3f, -0.5f,       0.0f, 1.0f,
 
     // Left face
     -0.5f, 0.0f, -0.5f,       0.0f, 0.0f,
     -0.5f, 0.0f,  0.5f,       1.0f, 0.0f,
-    -0.5f, 0.4f,  0.5f,       1.0f, 1.0f,
+    -0.5f, 0.3f,  0.5f,       1.0f, 1.0f,
     -0.5f, 0.0f, -0.5f,       0.0f, 0.0f,
-    -0.5f, 0.4f,  0.5f,       1.0f, 1.0f,
-    -0.5f, 0.4f, -0.5f,       0.0f, 1.0f,
+    -0.5f, 0.3f,  0.5f,       1.0f, 1.0f,
+    -0.5f, 0.3f, -0.5f,       0.0f, 1.0f,
 
     // Right face
      0.5f, 0.0f, -0.5f,       0.0f, 0.0f,
      0.5f, 0.0f,  0.5f,       1.0f, 0.0f,
-     0.5f, 0.4f,  0.5f,       1.0f, 1.0f,
+     0.5f, 0.3f,  0.5f,       1.0f, 1.0f,
      0.5f, 0.0f, -0.5f,       0.0f, 0.0f,
-     0.5f, 0.4f,  0.5f,       1.0f, 1.0f,
-     0.5f, 0.4f, -0.5f,       0.0f, 1.0f
+     0.5f, 0.3f,  0.5f,       1.0f, 1.0f,
+     0.5f, 0.3f, -0.5f,       0.0f, 1.0f
 };
 
 float rectangleVertices[] = {
     // Positions            // Texture Coords
-    -1.0f, 0.0f, -0.5f,     0.0f, 0.0f,
-     1.0f, 0.0f, -0.5f,     1.0f, 0.0f,
-     1.0f, 0.0f,  0.5f,     1.0f, 1.0f,
-    -1.0f, 0.0f,  0.5f,     0.0f, 1.0f,
+    -0.5f, -0.25f, 0.0f,     0.0f, 0.0f,  // Bottom-left
+     0.5f, -0.25f, 0.0f,     1.0f, 0.0f,  // Bottom-right
+     0.5f, 0.625f, 0.0f,     1.0f, 1.0f,  // Top-right
+    -0.5f, 0.625f, 0.0f,     0.0f, 1.0f   // Top-left
 };
 
 // Utility to load textures
@@ -570,6 +570,10 @@ int main() {
     unsigned int image7Texture = loadTexture("La Grande Jatte.jpg");
     unsigned int image8Texture = loadTexture("lastsupper.jpg");
 
+    unsigned int masterpiece = loadTexture("masterpiece.jpg");
+    unsigned int white_gold_marble = loadTexture("white-gold-marble.png");
+
+
     // Variables for the rotating camera
     float cameraAngle = 0.0f;  // Angle for rotation in radians
     float cameraSpeed = 0.0002f; // Speed of rotation
@@ -711,7 +715,7 @@ int main() {
 
             // Render Stand
             glBindVertexArray(standVAO);
-            glBindTexture(GL_TEXTURE_2D, floorTexture); // Adjust texture if needed
+            glBindTexture(GL_TEXTURE_2D, white_gold_marble); // Adjust texture if needed
             model = glm::mat4(1.0f);
             model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f)); // Adjust position as needed
             glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
@@ -719,11 +723,19 @@ int main() {
 
             // Render Rectangle
             glBindVertexArray(rectVAO);
-            glBindTexture(GL_TEXTURE_2D, wallTexture); // Adjust texture if needed
+            glBindTexture(GL_TEXTURE_2D, masterpiece); // Use a suitable texture
+
+            // Transform for spinning animation
             model = glm::mat4(1.0f);
-            model = glm::translate(model, glm::vec3(0.0f, 0.6f, 0.0f)); // Adjust position as needed
+            model = glm::translate(model, glm::vec3(0.0f, 0.5f, 0.0f)); // Position above ground
+            float angle = glfwGetTime() * glm::radians(20.0f); // Slow spin (adjust speed if needed)
+            model = glm::rotate(model, angle, glm::vec3(0.0f, 1.0f, 0.0f)); // Rotate around Y-axis
+
+            // Pass the model matrix to the shader
             glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-            glDrawArrays(GL_TRIANGLES, 0, 6);
+
+            // Draw the rectangle
+            glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
 
             // Swap buffers and poll events
             glfwSwapBuffers(window);
