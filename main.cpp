@@ -311,6 +311,65 @@ float vertices[] = {
 
 };
 
+float standVertices[] = {
+    // Positions              // Texture Coords
+    // Bottom face
+    -0.5f, 0.0f, -0.5f,       0.0f, 0.0f,
+     0.5f, 0.0f, -0.5f,       1.0f, 0.0f,
+     0.5f, 0.0f,  0.5f,       1.0f, 1.0f,
+    -0.5f, 0.0f, -0.5f,       0.0f, 0.0f,
+     0.5f, 0.0f,  0.5f,       1.0f, 1.0f,
+    -0.5f, 0.0f,  0.5f,       0.0f, 1.0f,
+
+    // Top face
+    -0.5f, 0.4f, -0.5f,       0.0f, 0.0f,
+     0.5f, 0.4f, -0.5f,       1.0f, 0.0f,
+     0.5f, 0.4f,  0.5f,       1.0f, 1.0f,
+    -0.5f, 0.4f, -0.5f,       0.0f, 0.0f,
+     0.5f, 0.4f,  0.5f,       1.0f, 1.0f,
+    -0.5f, 0.4f,  0.5f,       0.0f, 1.0f,
+
+    // Front face
+    -0.5f, 0.0f,  0.5f,       0.0f, 0.0f,
+     0.5f, 0.0f,  0.5f,       1.0f, 0.0f,
+     0.5f, 0.4f,  0.5f,       1.0f, 1.0f,
+    -0.5f, 0.0f,  0.5f,       0.0f, 0.0f,
+     0.5f, 0.4f,  0.5f,       1.0f, 1.0f,
+    -0.5f, 0.4f,  0.5f,       0.0f, 1.0f,
+
+    // Back face
+    -0.5f, 0.0f, -0.5f,       0.0f, 0.0f,
+     0.5f, 0.0f, -0.5f,       1.0f, 0.0f,
+     0.5f, 0.4f, -0.5f,       1.0f, 1.0f,
+    -0.5f, 0.0f, -0.5f,       0.0f, 0.0f,
+     0.5f, 0.4f, -0.5f,       1.0f, 1.0f,
+    -0.5f, 0.4f, -0.5f,       0.0f, 1.0f,
+
+    // Left face
+    -0.5f, 0.0f, -0.5f,       0.0f, 0.0f,
+    -0.5f, 0.0f,  0.5f,       1.0f, 0.0f,
+    -0.5f, 0.4f,  0.5f,       1.0f, 1.0f,
+    -0.5f, 0.0f, -0.5f,       0.0f, 0.0f,
+    -0.5f, 0.4f,  0.5f,       1.0f, 1.0f,
+    -0.5f, 0.4f, -0.5f,       0.0f, 1.0f,
+
+    // Right face
+     0.5f, 0.0f, -0.5f,       0.0f, 0.0f,
+     0.5f, 0.0f,  0.5f,       1.0f, 0.0f,
+     0.5f, 0.4f,  0.5f,       1.0f, 1.0f,
+     0.5f, 0.0f, -0.5f,       0.0f, 0.0f,
+     0.5f, 0.4f,  0.5f,       1.0f, 1.0f,
+     0.5f, 0.4f, -0.5f,       0.0f, 1.0f
+};
+
+float rectangleVertices[] = {
+    // Positions            // Texture Coords
+    -1.0f, 0.0f, -0.5f,     0.0f, 0.0f,
+     1.0f, 0.0f, -0.5f,     1.0f, 0.0f,
+     1.0f, 0.0f,  0.5f,     1.0f, 1.0f,
+    -1.0f, 0.0f,  0.5f,     0.0f, 1.0f,
+};
+
 // Utility to load textures
 unsigned int loadTexture(const char* path) {
     unsigned int textureID;
@@ -442,6 +501,8 @@ int main() {
 
     // Create VAO, VBO
     unsigned int VAO, VBO;
+    // Additional VAOs and VBOs for the stand and rectangle
+    unsigned int standVAO, standVBO, rectVAO, rectVBO;
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
 
@@ -453,6 +514,30 @@ int main() {
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
 
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+    glEnableVertexAttribArray(1);
+
+    // Setup for Stand
+    glGenVertexArrays(1, &standVAO);
+    glGenBuffers(1, &standVBO);
+    glBindVertexArray(standVAO);
+    glBindBuffer(GL_ARRAY_BUFFER, standVBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(standVertices), standVertices, GL_STATIC_DRAW);
+
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+    glEnableVertexAttribArray(1);
+
+    // Setup for Rectangle
+    glGenVertexArrays(1, &rectVAO);
+    glGenBuffers(1, &rectVBO);
+    glBindVertexArray(rectVAO);
+    glBindBuffer(GL_ARRAY_BUFFER, rectVBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(rectangleVertices), rectangleVertices, GL_STATIC_DRAW);
+
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0);
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
     glEnableVertexAttribArray(1);
 
@@ -526,120 +611,135 @@ int main() {
     glEnable(GL_DEPTH_TEST);
 
     // Rendering loop
-    while (!glfwWindowShouldClose(window)) {
-        float currentFrame = glfwGetTime();
-        float deltaTime = currentFrame - lastFrame;
-        lastFrame = currentFrame;
+        while (!glfwWindowShouldClose(window)) {
+            float currentFrame = glfwGetTime();
+            float deltaTime = currentFrame - lastFrame;
+            lastFrame = currentFrame;
 
-        // Process input
-        processInput(window);
-        camera.ProcessKeyboard(keys, deltaTime);
+            // Process input
+            processInput(window);
+            camera.ProcessKeyboard(keys, deltaTime);
 
-        // Clear the color and depth buffers
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            // Clear the color and depth buffers
+            glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        // Use the shader program
-        glUseProgram(shaderProgram);
+            // Use the shader program
+            glUseProgram(shaderProgram);
 
-        // View matrix
-        glm::mat4 view = camera.GetViewMatrix();
-        glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+            // Set up view and projection matrices
+            glm::mat4 view = camera.GetViewMatrix();
+            glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+            glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
 
-        glm::mat4 model = glm::mat4(1.0f);  // Identity matrix
-        glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+            // Render Room
+            glBindVertexArray(VAO);
+            glm::mat4 model = glm::mat4(1.0f);
+            glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
-        lightPos.x = sin(glfwGetTime()) * 2.0f;
-        lightPos.z = cos(glfwGetTime()) * 2.0f;
-        glUniform3fv(lightPosLoc, 1, glm::value_ptr(lightPos));
+            // Render floor
+            glBindTexture(GL_TEXTURE_2D, floorTexture);
+            glDrawArrays(GL_TRIANGLES, 0, 6);
 
-        for (int i = 0; i < 4; i++) {
-            lightPositions[i].x = cos(glfwGetTime() + i) * 2.0f; // Circular motion
-            lightPositions[i].z = sin(glfwGetTime() + i) * 2.0f;
+            // Render ceiling
+            glBindTexture(GL_TEXTURE_2D, ceilingTexture);
+            glDrawArrays(GL_TRIANGLES, 6, 6);
 
-            std::string lightPosUniform = "lightPositions[" + std::to_string(i) + "]";
-            glUniform3fv(glGetUniformLocation(shaderProgram, lightPosUniform.c_str()), 1, glm::value_ptr(lightPositions[i]));
+            // Draw walls
+            glBindTexture(GL_TEXTURE_2D, wallTexture);
+            glDrawArrays(GL_TRIANGLES, 12, 6);
+
+            glBindTexture(GL_TEXTURE_2D, image1Texture);
+            glDrawArrays(GL_TRIANGLES, 18, 6);
+
+            glBindTexture(GL_TEXTURE_2D, wallTexture);
+            glDrawArrays(GL_TRIANGLES, 24, 6);
+
+            glBindTexture(GL_TEXTURE_2D, image2Texture);
+            glDrawArrays(GL_TRIANGLES, 30, 6);
+
+            glBindTexture(GL_TEXTURE_2D, wallTexture);
+            glDrawArrays(GL_TRIANGLES, 36, 6);
+
+            glBindTexture(GL_TEXTURE_2D, image3Texture);
+            glDrawArrays(GL_TRIANGLES, 42, 6);
+
+            glBindTexture(GL_TEXTURE_2D, wallTexture);
+            glDrawArrays(GL_TRIANGLES, 48, 6);
+
+            glBindTexture(GL_TEXTURE_2D, image4Texture);
+            glDrawArrays(GL_TRIANGLES, 54, 6);
+
+            glBindTexture(GL_TEXTURE_2D, wallTexture);
+            glDrawArrays(GL_TRIANGLES, 60, 6);
+
+            glBindTexture(GL_TEXTURE_2D, image5Texture);
+            glDrawArrays(GL_TRIANGLES, 72, 6);
+
+            glBindTexture(GL_TEXTURE_2D, wallTexture);
+            glDrawArrays(GL_TRIANGLES, 78, 6);
+
+            glBindTexture(GL_TEXTURE_2D, image6Texture);
+            glDrawArrays(GL_TRIANGLES, 84, 6);
+
+            glBindTexture(GL_TEXTURE_2D, wallTexture);
+            glDrawArrays(GL_TRIANGLES, 90, 6);
+
+            glBindTexture(GL_TEXTURE_2D, image7Texture);
+            glDrawArrays(GL_TRIANGLES, 96, 6);
+
+            glBindTexture(GL_TEXTURE_2D, wallTexture);
+            glDrawArrays(GL_TRIANGLES, 102, 6);
+
+            glBindTexture(GL_TEXTURE_2D, image8Texture);
+            glDrawArrays(GL_TRIANGLES, 108, 6);
+
+            glBindTexture(GL_TEXTURE_2D, wallTexture);
+            glDrawArrays(GL_TRIANGLES, 114, 6);
+
+            glBindTexture(GL_TEXTURE_2D, wallTexture);
+            glDrawArrays(GL_TRIANGLES, 120, 6);
+
+            glBindTexture(GL_TEXTURE_2D, wallTexture);
+            glDrawArrays(GL_TRIANGLES, 126, 6);
+
+            glBindTexture(GL_TEXTURE_2D, wallTexture);
+            glDrawArrays(GL_TRIANGLES, 132, 30);
+
+            glBindTexture(GL_TEXTURE_2D, wallTexture);
+            glDrawArrays(GL_TRIANGLES, 162, 30);
+
+            // Render Stand
+            glBindVertexArray(standVAO);
+            glBindTexture(GL_TEXTURE_2D, floorTexture); // Adjust texture if needed
+            model = glm::mat4(1.0f);
+            model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f)); // Adjust position as needed
+            glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+            glDrawArrays(GL_TRIANGLES, 0, 36);
+
+            // Render Rectangle
+            glBindVertexArray(rectVAO);
+            glBindTexture(GL_TEXTURE_2D, wallTexture); // Adjust texture if needed
+            model = glm::mat4(1.0f);
+            model = glm::translate(model, glm::vec3(0.0f, 0.6f, 0.0f)); // Adjust position as needed
+            glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+            glDrawArrays(GL_TRIANGLES, 0, 6);
+
+            // Swap buffers and poll events
+            glfwSwapBuffers(window);
+            glfwPollEvents();
         }
-
-        // Draw floor and ceiling
-        glBindTexture(GL_TEXTURE_2D, floorTexture);
-        glDrawArrays(GL_TRIANGLES, 0, 6);
-
-        glBindTexture(GL_TEXTURE_2D, ceilingTexture);
-        glDrawArrays(GL_TRIANGLES, 6, 6);
-
-        // Draw walls
-        glBindTexture(GL_TEXTURE_2D, wallTexture);
-        glDrawArrays(GL_TRIANGLES, 12, 6);
-
-        glBindTexture(GL_TEXTURE_2D, image1Texture);
-        glDrawArrays(GL_TRIANGLES, 18, 6);
-
-        glBindTexture(GL_TEXTURE_2D, wallTexture);
-        glDrawArrays(GL_TRIANGLES, 24, 6);
-
-        glBindTexture(GL_TEXTURE_2D, image2Texture);
-        glDrawArrays(GL_TRIANGLES, 30, 6);
-
-        glBindTexture(GL_TEXTURE_2D, wallTexture);
-        glDrawArrays(GL_TRIANGLES, 36, 6);
-
-        glBindTexture(GL_TEXTURE_2D, image3Texture);
-        glDrawArrays(GL_TRIANGLES, 42, 6);
-
-        glBindTexture(GL_TEXTURE_2D, wallTexture);
-        glDrawArrays(GL_TRIANGLES, 48, 6);
-
-        glBindTexture(GL_TEXTURE_2D, image4Texture);
-        glDrawArrays(GL_TRIANGLES, 54, 6);
-
-        glBindTexture(GL_TEXTURE_2D, wallTexture);
-        glDrawArrays(GL_TRIANGLES, 60, 6);
-
-        glBindTexture(GL_TEXTURE_2D, image5Texture);
-        glDrawArrays(GL_TRIANGLES, 72, 6);
-
-        glBindTexture(GL_TEXTURE_2D, wallTexture);
-        glDrawArrays(GL_TRIANGLES, 78, 6);
-
-        glBindTexture(GL_TEXTURE_2D, image6Texture);
-        glDrawArrays(GL_TRIANGLES, 84, 6);
-
-        glBindTexture(GL_TEXTURE_2D, wallTexture);
-        glDrawArrays(GL_TRIANGLES, 90, 6);
-
-        glBindTexture(GL_TEXTURE_2D, image7Texture);
-        glDrawArrays(GL_TRIANGLES, 96, 6);
-
-        glBindTexture(GL_TEXTURE_2D, wallTexture);
-        glDrawArrays(GL_TRIANGLES, 102, 6);
-
-        glBindTexture(GL_TEXTURE_2D, image8Texture);
-        glDrawArrays(GL_TRIANGLES, 108, 6);
-
-        glBindTexture(GL_TEXTURE_2D, wallTexture);
-        glDrawArrays(GL_TRIANGLES, 114, 6);
-
-        glBindTexture(GL_TEXTURE_2D, wallTexture);
-        glDrawArrays(GL_TRIANGLES, 120, 6);
-
-        glBindTexture(GL_TEXTURE_2D, wallTexture);
-        glDrawArrays(GL_TRIANGLES, 126, 6);
-
-        glBindTexture(GL_TEXTURE_2D, wallTexture);
-        glDrawArrays(GL_TRIANGLES, 132, 30);
-
-        glBindTexture(GL_TEXTURE_2D, wallTexture);
-        glDrawArrays(GL_TRIANGLES, 162, 30);
-
-        glfwSwapBuffers(window);
-        glfwPollEvents();
-    }
 
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
     glDeleteTextures(1, &floorTexture);
     glDeleteTextures(1, &wallTexture);
+
+    // Cleanup for stand and rectangle
+    glDeleteVertexArrays(1, &standVAO);
+    glDeleteBuffers(1, &standVBO);
+    glDeleteVertexArrays(1, &rectVAO);
+    glDeleteBuffers(1, &rectVBO);
 
     glfwTerminate();
     return 0;
