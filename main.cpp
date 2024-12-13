@@ -404,7 +404,7 @@ void processInput(GLFWwindow* window) {
 
 // Initialize camera
 
-Camera camera(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
+Camera camera(glm::vec3(0.0f, 0.5f, 3.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
 
 bool keys[1024];
 float lastX = 400, lastY = 300;
@@ -432,7 +432,8 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos) {
         lastY = ypos;
 
         camera.ProcessMouseMovement(xoffset, yoffset);
-    } else {
+    }
+    else {
         lastX = xpos;
         lastY = ypos;
     }
@@ -442,7 +443,8 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
     if (button == GLFW_MOUSE_BUTTON_RIGHT) {
         if (action == GLFW_PRESS) {
             rightMouseButtonPressed = true;
-        } else if (action == GLFW_RELEASE) {
+        }
+        else if (action == GLFW_RELEASE) {
             rightMouseButtonPressed = false;
         }
     }
@@ -615,132 +617,132 @@ int main() {
     glEnable(GL_DEPTH_TEST);
 
     // Rendering loop
-        while (!glfwWindowShouldClose(window)) {
-            float currentFrame = glfwGetTime();
-            float deltaTime = currentFrame - lastFrame;
-            lastFrame = currentFrame;
+    while (!glfwWindowShouldClose(window)) {
+        float currentFrame = glfwGetTime();
+        float deltaTime = currentFrame - lastFrame;
+        lastFrame = currentFrame;
 
-            // Process input
-            processInput(window);
-            camera.ProcessKeyboard(keys, deltaTime);
+        // Process input
+        processInput(window);
+        camera.ProcessKeyboard(keys, deltaTime);
 
-            // Clear the color and depth buffers
-            glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        // Clear the color and depth buffers
+        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-            // Use the shader program
-            glUseProgram(shaderProgram);
+        // Use the shader program
+        glUseProgram(shaderProgram);
 
-            // Set up view and projection matrices
-            glm::mat4 view = camera.GetViewMatrix();
-            glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
-            glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
+        // Set up view and projection matrices
+        glm::mat4 view = camera.GetViewMatrix();
+        glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+        glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
 
-            // Render Room
-            glBindVertexArray(VAO);
-            glm::mat4 model = glm::mat4(1.0f);
-            glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+        // Render Room
+        glBindVertexArray(VAO);
+        glm::mat4 model = glm::mat4(1.0f);
+        glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
-            // Render floor
-            glBindTexture(GL_TEXTURE_2D, floorTexture);
-            glDrawArrays(GL_TRIANGLES, 0, 6);
+        // Render floor
+        glBindTexture(GL_TEXTURE_2D, floorTexture);
+        glDrawArrays(GL_TRIANGLES, 0, 6);
 
-            // Render ceiling
-            glBindTexture(GL_TEXTURE_2D, ceilingTexture);
-            glDrawArrays(GL_TRIANGLES, 6, 6);
+        // Render ceiling
+        glBindTexture(GL_TEXTURE_2D, ceilingTexture);
+        glDrawArrays(GL_TRIANGLES, 6, 6);
 
-            // Draw walls
-            glBindTexture(GL_TEXTURE_2D, wallTexture);
-            glDrawArrays(GL_TRIANGLES, 12, 6);
+        // Draw walls
+        glBindTexture(GL_TEXTURE_2D, wallTexture);
+        glDrawArrays(GL_TRIANGLES, 12, 6);
 
-            glBindTexture(GL_TEXTURE_2D, image1Texture);
-            glDrawArrays(GL_TRIANGLES, 18, 6);
+        glBindTexture(GL_TEXTURE_2D, image1Texture);
+        glDrawArrays(GL_TRIANGLES, 18, 6);
 
-            glBindTexture(GL_TEXTURE_2D, wallTexture);
-            glDrawArrays(GL_TRIANGLES, 24, 6);
+        glBindTexture(GL_TEXTURE_2D, wallTexture);
+        glDrawArrays(GL_TRIANGLES, 24, 6);
 
-            glBindTexture(GL_TEXTURE_2D, image2Texture);
-            glDrawArrays(GL_TRIANGLES, 30, 6);
+        glBindTexture(GL_TEXTURE_2D, image2Texture);
+        glDrawArrays(GL_TRIANGLES, 30, 6);
 
-            glBindTexture(GL_TEXTURE_2D, wallTexture);
-            glDrawArrays(GL_TRIANGLES, 36, 6);
+        glBindTexture(GL_TEXTURE_2D, wallTexture);
+        glDrawArrays(GL_TRIANGLES, 36, 6);
 
-            glBindTexture(GL_TEXTURE_2D, image3Texture);
-            glDrawArrays(GL_TRIANGLES, 42, 6);
+        glBindTexture(GL_TEXTURE_2D, image3Texture);
+        glDrawArrays(GL_TRIANGLES, 42, 6);
 
-            glBindTexture(GL_TEXTURE_2D, wallTexture);
-            glDrawArrays(GL_TRIANGLES, 48, 6);
+        glBindTexture(GL_TEXTURE_2D, wallTexture);
+        glDrawArrays(GL_TRIANGLES, 48, 6);
 
-            glBindTexture(GL_TEXTURE_2D, image4Texture);
-            glDrawArrays(GL_TRIANGLES, 54, 6);
+        glBindTexture(GL_TEXTURE_2D, image4Texture);
+        glDrawArrays(GL_TRIANGLES, 54, 6);
 
-            glBindTexture(GL_TEXTURE_2D, wallTexture);
-            glDrawArrays(GL_TRIANGLES, 60, 6);
+        glBindTexture(GL_TEXTURE_2D, wallTexture);
+        glDrawArrays(GL_TRIANGLES, 60, 6);
 
-            glBindTexture(GL_TEXTURE_2D, image5Texture);
-            glDrawArrays(GL_TRIANGLES, 72, 6);
+        glBindTexture(GL_TEXTURE_2D, image5Texture);
+        glDrawArrays(GL_TRIANGLES, 72, 6);
 
-            glBindTexture(GL_TEXTURE_2D, wallTexture);
-            glDrawArrays(GL_TRIANGLES, 78, 6);
+        glBindTexture(GL_TEXTURE_2D, wallTexture);
+        glDrawArrays(GL_TRIANGLES, 78, 6);
 
-            glBindTexture(GL_TEXTURE_2D, image6Texture);
-            glDrawArrays(GL_TRIANGLES, 84, 6);
+        glBindTexture(GL_TEXTURE_2D, image6Texture);
+        glDrawArrays(GL_TRIANGLES, 84, 6);
 
-            glBindTexture(GL_TEXTURE_2D, wallTexture);
-            glDrawArrays(GL_TRIANGLES, 90, 6);
+        glBindTexture(GL_TEXTURE_2D, wallTexture);
+        glDrawArrays(GL_TRIANGLES, 90, 6);
 
-            glBindTexture(GL_TEXTURE_2D, image7Texture);
-            glDrawArrays(GL_TRIANGLES, 96, 6);
+        glBindTexture(GL_TEXTURE_2D, image7Texture);
+        glDrawArrays(GL_TRIANGLES, 96, 6);
 
-            glBindTexture(GL_TEXTURE_2D, wallTexture);
-            glDrawArrays(GL_TRIANGLES, 102, 6);
+        glBindTexture(GL_TEXTURE_2D, wallTexture);
+        glDrawArrays(GL_TRIANGLES, 102, 6);
 
-            glBindTexture(GL_TEXTURE_2D, image8Texture);
-            glDrawArrays(GL_TRIANGLES, 108, 6);
+        glBindTexture(GL_TEXTURE_2D, image8Texture);
+        glDrawArrays(GL_TRIANGLES, 108, 6);
 
-            glBindTexture(GL_TEXTURE_2D, wallTexture);
-            glDrawArrays(GL_TRIANGLES, 114, 6);
+        glBindTexture(GL_TEXTURE_2D, wallTexture);
+        glDrawArrays(GL_TRIANGLES, 114, 6);
 
-            glBindTexture(GL_TEXTURE_2D, wallTexture);
-            glDrawArrays(GL_TRIANGLES, 120, 6);
+        glBindTexture(GL_TEXTURE_2D, wallTexture);
+        glDrawArrays(GL_TRIANGLES, 120, 6);
 
-            glBindTexture(GL_TEXTURE_2D, wallTexture);
-            glDrawArrays(GL_TRIANGLES, 126, 6);
+        glBindTexture(GL_TEXTURE_2D, wallTexture);
+        glDrawArrays(GL_TRIANGLES, 126, 6);
 
-            glBindTexture(GL_TEXTURE_2D, wallTexture);
-            glDrawArrays(GL_TRIANGLES, 132, 30);
+        glBindTexture(GL_TEXTURE_2D, wallTexture);
+        glDrawArrays(GL_TRIANGLES, 132, 30);
 
-            glBindTexture(GL_TEXTURE_2D, wallTexture);
-            glDrawArrays(GL_TRIANGLES, 162, 30);
+        glBindTexture(GL_TEXTURE_2D, wallTexture);
+        glDrawArrays(GL_TRIANGLES, 162, 30);
 
-            // Render Stand
-            glBindVertexArray(standVAO);
-            glBindTexture(GL_TEXTURE_2D, white_gold_marble); // Adjust texture if needed
-            model = glm::mat4(1.0f);
-            model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f)); // Adjust position as needed
-            glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-            glDrawArrays(GL_TRIANGLES, 0, 36);
+        // Render Stand
+        glBindVertexArray(standVAO);
+        glBindTexture(GL_TEXTURE_2D, white_gold_marble); // Adjust texture if needed
+        model = glm::mat4(1.0f);
+        model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f)); // Adjust position as needed
+        glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+        glDrawArrays(GL_TRIANGLES, 0, 36);
 
-            // Render Rectangle
-            glBindVertexArray(rectVAO);
-            glBindTexture(GL_TEXTURE_2D, masterpiece); // Use a suitable texture
+        // Render Rectangle
+        glBindVertexArray(rectVAO);
+        glBindTexture(GL_TEXTURE_2D, masterpiece); // Use a suitable texture
 
-            // Transform for spinning animation
-            model = glm::mat4(1.0f);
-            model = glm::translate(model, glm::vec3(0.0f, 0.5f, 0.0f)); // Position above ground
-            float angle = glfwGetTime() * glm::radians(20.0f); // Slow spin (adjust speed if needed)
-            model = glm::rotate(model, angle, glm::vec3(0.0f, 1.0f, 0.0f)); // Rotate around Y-axis
+        // Transform for spinning animation
+        model = glm::mat4(1.0f);
+        model = glm::translate(model, glm::vec3(0.0f, 0.5f, 0.0f)); // Position above ground
+        float angle = glfwGetTime() * glm::radians(20.0f); // Slow spin (adjust speed if needed)
+        model = glm::rotate(model, angle, glm::vec3(0.0f, 1.0f, 0.0f)); // Rotate around Y-axis
 
-            // Pass the model matrix to the shader
-            glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+        // Pass the model matrix to the shader
+        glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
-            // Draw the rectangle
-            glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+        // Draw the rectangle
+        glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
 
-            // Swap buffers and poll events
-            glfwSwapBuffers(window);
-            glfwPollEvents();
-        }
+        // Swap buffers and poll events
+        glfwSwapBuffers(window);
+        glfwPollEvents();
+    }
 
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
