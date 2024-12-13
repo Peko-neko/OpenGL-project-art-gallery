@@ -517,6 +517,31 @@ int main() {
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
     glEnableVertexAttribArray(1);
 
+    // Create framebuffer object
+    GLuint mirrorFBO;
+    glGenFramebuffers(1, &mirrorFBO);
+    glBindFramebuffer(GL_FRAMEBUFFER, mirrorFBO);
+
+    // Create texture to hold the mirror image
+    GLuint mirrorTexture;
+    glGenTextures(1, &mirrorTexture);
+    glBindTexture(GL_TEXTURE_2D, mirrorTexture);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 1920, 1080, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, mirrorTexture, 0);
+
+    // Create renderbuffer object for depth and stencil attachment
+    GLuint rbo;
+    glGenRenderbuffers(1, &rbo);
+    glBindRenderbuffer(GL_RENDERBUFFER, rbo);
+    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, 1920, 1080);
+    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rbo);
+
+    if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+        std::cout << "ERROR::FRAMEBUFFER:: Framebuffer is not complete!" << std::endl;
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
     // Setup for Stand
     glGenVertexArrays(1, &standVAO);
     glGenBuffers(1, &standVBO);
@@ -623,6 +648,89 @@ int main() {
             // Process input
             processInput(window);
             camera.ProcessKeyboard(keys, deltaTime);
+            
+            // Render to the framebuffer for the mirror
+            glBindFramebuffer(GL_FRAMEBUFFER, mirrorFBO);
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+            // Set up view and projection matrices for the mirror
+            glm::mat4 mirrorView = glm::scale(glm::translate(camera.GetViewMatrix(), glm::vec3(12.5f, 0.0f, 0.0f)), glm::vec3(-1.0f, 1.0f, 1.0f)); // Assuming the mirror is on the right wall
+            glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(mirrorView));
+            glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(projection));
+
+            // Render the scene from the mirror's perspective
+            glBindVertexArray(VAO);
+            glm::mat4 model = glm::mat4(1.0f);
+            glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+
+            // Render floor
+            glBindTexture(GL_TEXTURE_2D, floorTexture);
+            glDrawArrays(GL_TRIANGLES, 0, 6);
+
+            // Render ceiling
+            glBindTexture(GL_TEXTURE_2D, ceilingTexture);
+            glDrawArrays(GL_TRIANGLES, 6, 6);
+
+            // Draw walls
+            glBindTexture(GL_TEXTURE_2D, wallTexture);
+            glDrawArrays(GL_TRIANGLES, 12, 6);
+
+            glBindTexture(GL_TEXTURE_2D, image1Texture);
+            glDrawArrays(GL_TRIANGLES, 18, 6);
+
+            glBindTexture(GL_TEXTURE_2D, wallTexture);
+            glDrawArrays(GL_TRIANGLES, 24, 6);
+
+            glBindTexture(GL_TEXTURE_2D, image2Texture);
+            glDrawArrays(GL_TRIANGLES, 30, 6);
+
+            glBindTexture(GL_TEXTURE_2D, wallTexture);
+            glDrawArrays(GL_TRIANGLES, 36, 6);
+
+            glBindTexture(GL_TEXTURE_2D, image3Texture);
+            glDrawArrays(GL_TRIANGLES, 42, 6);
+
+            glBindTexture(GL_TEXTURE_2D, wallTexture);
+            glDrawArrays(GL_TRIANGLES, 48, 6);
+
+            glBindTexture(GL_TEXTURE_2D, image4Texture);
+            glDrawArrays(GL_TRIANGLES, 54, 6);
+
+            glBindTexture(GL_TEXTURE_2D, wallTexture);
+            glDrawArrays(GL_TRIANGLES, 60, 6);
+
+            glBindTexture(GL_TEXTURE_2D, image5Texture);
+            glDrawArrays(GL_TRIANGLES, 72, 6);
+
+            glBindTexture(GL_TEXTURE_2D, wallTexture);
+            glDrawArrays(GL_TRIANGLES, 78, 6);
+
+            glBindTexture(GL_TEXTURE_2D, image6Texture);
+            glDrawArrays(GL_TRIANGLES, 84, 6);
+
+            glBindTexture(GL_TEXTURE_2D, wallTexture);
+            glDrawArrays(GL_TRIANGLES, 90, 6);
+
+            glBindTexture(GL_TEXTURE_2D, image7Texture);
+            glDrawArrays(GL_TRIANGLES, 96, 6);
+
+            glBindTexture(GL_TEXTURE_2D, wallTexture);
+            glDrawArrays(GL_TRIANGLES, 102, 6);
+
+            glBindTexture(GL_TEXTURE_2D, image8Texture);
+            glDrawArrays(GL_TRIANGLES, 108, 6);
+
+            glBindTexture(GL_TEXTURE_2D, wallTexture);
+            glDrawArrays(GL_TRIANGLES, 114, 6);
+
+            glBindTexture(GL_TEXTURE_2D, wallTexture);
+            glDrawArrays(GL_TRIANGLES, 120, 6);
+
+            glBindTexture(GL_TEXTURE_2D, wallTexture);
+            glDrawArrays(GL_TRIANGLES, 126, 6);
+
+            // Unbind the framebuffer
+            glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
             // Clear the color and depth buffers
             glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
@@ -707,7 +815,7 @@ int main() {
             glBindTexture(GL_TEXTURE_2D, wallTexture);
             glDrawArrays(GL_TRIANGLES, 126, 6);
 
-            glBindTexture(GL_TEXTURE_2D, wallTexture);
+            glBindTexture(GL_TEXTURE_2D, mirrorTexture);
             glDrawArrays(GL_TRIANGLES, 132, 30);
 
             glBindTexture(GL_TEXTURE_2D, wallTexture);
